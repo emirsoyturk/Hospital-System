@@ -4,7 +4,7 @@ const Navbar = () => {
 	return (
 		<nav class="px-2 py-3">
 			<div class="container flex flex-wrap justify-between items-center mx-auto">
-				<a href="" class="flex items-center">
+				<a href="google.com" class="flex items-center">
 					{/* <img src="" class="mr-3 h-6 sm:h-9" alt="Hospital Logo" /> */}
 					<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
 						Hospital Logo
@@ -29,10 +29,10 @@ const Navbar = () => {
 							{' '}
 							Contact us{' '}
 						</li>
-						<li class="block py-2 pr-8 font-semibold pl-5 text-blue-700 text-xl border rounded-2xl border-blue-700 bg-blue-700 text-white border-2 rounded">
+						<li class="block py-2 pr-8 font-semibold pl-5 text-blue-700 text-xl border rounded-2xl border-blue-700 bg-blue-700 text-white text-center border-2 rounded">
 							Sign in
 						</li>
-						<li class="block py-2 pr-8 font-semibold pl-5 text-blue-700 text-xl border rounded-2xl border-blue-700 hover:bg-blue-700 hover:text-white border-2 rounded">
+						<li class="block py-2 pr-8 font-semibold pl-5 text-blue-700 text-xl border rounded-2xl border-blue-700 hover:bg-blue-700 hover:text-white text-center border-2 rounded">
 							Sign up
 						</li>
 					</ul>

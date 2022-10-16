@@ -1,6 +1,6 @@
 import '../output.css'
 
-const Navbar = () => {
+const Introduction = () => {
 	return (
 		<div class="py-10">
 			<div class="flex flex-col items-center" id="heading">
@@ -33,4 +33,4 @@ const Navbar = () => {
 		</div>
 	)
 }
-export default Navbar
+export default Introduction

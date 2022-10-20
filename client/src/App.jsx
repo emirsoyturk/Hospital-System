@@ -1,17 +1,23 @@
 import './App.css'
 import '../src/output.css'
 import Navbar from './components/Navbar'
-import Introduction from './components/Introduction'
-import Services from './components/Services'
-import DoctorIntro from './components/DoctorIntro'
+import Home from './components/Home'
+import Footer from './components/Footer'
+import SignIn from './components/SignIn'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
 const App = () => {
 	return (
-		<div class="h-[1500px]">
-			<Navbar> </Navbar>
-			<Introduction> </Introduction>
-			<Services> </Services>
-			<DoctorIntro> </DoctorIntro>
+		<div class="flex flex-col ">
+			<Navbar />
+
+			<Router>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/SignIn" element={<SignIn />} />
+				</Routes>
+			</Router>
+			<Footer />
 		</div>
 	)
 }

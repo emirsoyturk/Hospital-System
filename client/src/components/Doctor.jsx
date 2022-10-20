@@ -12,8 +12,7 @@ const Doctor = ({ id }) => {
 			<h1> Doctor Name </h1>
 			<h1> Speciality</h1>
 			<button class="border border-xl rounded-xl text-blue-700 border-blue-700 hover:bg-blue-700 hover:text-white p-4">
-				{' '}
-				Book an Appointment{' '}
+				Book an Appointment
 			</button>
 		</div>
 	)

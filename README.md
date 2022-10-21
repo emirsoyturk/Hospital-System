@@ -44,11 +44,11 @@
    ```
 3. Install yarn
    ```sh
-       npm install --global yarn
+   npm install --global yarn
    ```
 4. Install react
    ```sh 
-        yarn add react yarn add react-router-dom
+   yarn add react yarn add react-router-dom
    ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

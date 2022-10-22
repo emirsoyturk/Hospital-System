@@ -35,7 +35,7 @@ const Navbar = () => {
 							Sign in
 						</a>
 						<a
-							href="/"
+							href="/Profile"
 							class="block py-2 pr-8 font-semibold pl-5 text-blue-700 text-xl border rounded-2xl border-blue-700 hover:bg-blue-700 hover:text-white text-center border-2 rounded"
 						>
 							Sign up

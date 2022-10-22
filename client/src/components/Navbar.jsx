@@ -2,7 +2,7 @@ import '../output.css'
 
 const Navbar = () => {
 	return (
-		<nav class="px-8 py-3">
+		<nav class="px-8 py-3 bg-[#f1f5fc]">
 			<div class="container flex flex-wrap justify-between items-center mx-auto">
 				<a href="/" class="flex items-center">
 					{/* <img src="" class="mr-3 h-6 sm:h-9" alt="Hospital Logo" /> */}

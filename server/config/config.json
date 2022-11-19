@@ -2,8 +2,8 @@
 	"development": {
 		"username": "emir",
 		"password": "password",
-		"database": "hospital",
-		"host": "10.2.142.20",
+		"database": "healthmanagementsystem",
+		"host": "10.2.136.130",
 		"dialect": "mysql"
 	},
 	"test": {

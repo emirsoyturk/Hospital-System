@@ -1,6 +1,6 @@
-import '../output.css'
+import '../../output.css'
 
-const SignIn = () => {
+const SignUp = () => {
 	return (
 		<div class="flex rounded-2xl bg-slate-50 shadow-[20px_35px_20px_-15px_rgba(0,0,0,0.3)] w-[50rem] h-[40rem] mx-auto mb-10 mt-10">
 			<div class="rounded-l-2xl bg-indigo-500 w-[10rem] h-[40rem]"></div>
@@ -74,4 +74,4 @@ const SignIn = () => {
 		</div>
 	)
 }
-export default SignIn
+export default SignUp

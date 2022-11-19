@@ -1,3 +1,4 @@
+import Appointments from '../components/Appointments'
 import '../output.css'
 
 const DoctorAdmin = () => {
@@ -35,49 +36,14 @@ const DoctorAdmin = () => {
 				<h1 class="px-16 pt-8 text-xl font-bold text-indigo-700"> Welcome, Dr.Robert Harry </h1>
 				<div class="grid grid-cols-6 px-8 py-8 gap-y-8 gap-x-12">
 					<div class="flex flex-row col-start-1 col-span-2 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-16 px-8 py-4 justify-between">
-						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250740.png" />
+						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250740.png" alt="" />
 						3000 Patient Treated
 					</div>
 					<div class="col-start-3 col-span-2 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-16 p-4">
 						Rating
 					</div>
 					<div class="col-start-1 col-span-4 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-40 p-4">
-						<h1 class="text-indigo-600 text-lg"> Appointment requests </h1>
-						<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-							<thead>
-								<tr>
-									<th> Name </th>
-									<th> Disease </th>
-									<th> Date </th>
-									<th> Approval </th>
-								</tr>
-							</thead>
-							<tbody class="">
-								<tr class="">
-									<td> Emir Soyturk </td>
-									<td> Disease </td>
-									<td> 01/27 </td>
-									<td> Yes </td>
-								</tr>
-								<tr>
-									<td>Emir Soyturk</td>
-									<td> Disease </td>
-									<td> 01/27 </td>
-									<td> Yes </td>
-								</tr>
-								<tr>
-									<td>Emir Soyturk</td>
-									<td> Disease </td>
-									<td> 01/27 </td>
-									<td> Yes </td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="flow-root">
-							<h1 class="float-right font-light text-indigo-500 hover:cursor-pointer  hover:">
-								See more
-							</h1>
-						</div>
+						<Appointments />
 					</div>
 					<div class="col-start-5 col-span-2 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-40 p-4">
 						<h1 class="text-indigo-600 text-lg"> Most visited clients </h1>

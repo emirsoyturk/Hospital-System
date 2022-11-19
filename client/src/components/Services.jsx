@@ -10,7 +10,7 @@ const Services = () => {
 			</h1>
 
 			<div class="flex space-x-10 pt-10">
-				<div class="rounded-3xl font-semibold space-y-8 pt-8 hover:bg-indigo-700 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[12rem] h-[12rem] flex flex-col items-center">
+				<div class="rounded-3xl font-semibold space-y-8 pt-8 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[12rem] h-[12rem] flex flex-col items-center">
 					<img
 						class="w-20 h-20"
 						src="https://cdn-icons-png.flaticon.com/512/1250/1250720.png"
@@ -18,7 +18,7 @@ const Services = () => {
 					></img>
 					<h1> Well equipped lab </h1>
 				</div>
-				<div class="rounded-3xl font-semibold space-y-8 pt-8 hover:bg-indigo-700 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[12rem] h-[12rem] flex flex-col items-center">
+				<div class="rounded-3xl font-semibold space-y-8 pt-8 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[12rem] h-[12rem] flex flex-col items-center">
 					<img
 						class="w-20 h-20"
 						src="https://cdn-icons-png.flaticon.com/512/1254/1254770.png"
@@ -26,7 +26,7 @@ const Services = () => {
 					></img>
 					<h1> Emergency Ambulance </h1>
 				</div>
-				<div class="rounded-3xl font-semibold space-y-8 pt-8 hover:bg-indigo-700 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[12rem] h-[12rem] flex flex-col items-center">
+				<div class="rounded-3xl font-semibold space-y-8 pt-8 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[12rem] h-[12rem] flex flex-col items-center">
 					<img
 						class="w-20 h-20"
 						src="https://cdn-icons-png.flaticon.com/512/1250/1250620.png"
@@ -34,7 +34,7 @@ const Services = () => {
 					></img>
 					<h1> Online Appointment </h1>
 				</div>
-				<div class="rounded-3xl font-semibold space-y-8 pt-8 hover:bg-indigo-700 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[12rem] h-[12rem] flex flex-col items-center">
+				<div class="rounded-3xl font-semibold space-y-8 pt-8 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[12rem] h-[12rem] flex flex-col items-center">
 					<img
 						class="w-20 h-20"
 						src="https://cdn-icons-png.flaticon.com/512/1167/1167061.png"

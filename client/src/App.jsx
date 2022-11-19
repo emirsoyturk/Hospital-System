@@ -3,11 +3,15 @@ import '../src/output.css'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Footer from './components/Footer'
-import SignIn from './components/SignIn'
+import SignIn from './components/Login/SignIn'
+import SignUp from './components/Login/SignUp'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import DoctorAdmin from './pages/DoctorAdmin'
+import { useState } from 'react'
 
 const App = () => {
+	const [token, setToken] = useState()
+
 	return (
 		<div class="flex flex-col ">
 			<Navbar />
@@ -15,6 +19,7 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/SignIn" element={<SignIn />} />
+					<Route path="/SignUp" element={<SignUp />} />
 					<Route path="/Profile" element={<DoctorAdmin />} />
 				</Routes>
 			</Router>

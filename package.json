@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "create-react-app": "^5.0.1",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "odbc": "^2.4.6"
   }
 }

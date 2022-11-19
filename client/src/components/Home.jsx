@@ -2,6 +2,8 @@ import Introduction from './Introduction'
 import Services from './Services'
 import DoctorIntro from './DoctorIntro'
 import '../output.css'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 const Home = () => {
 	return (

@@ -1,17 +1,16 @@
 import '../output.css'
-import Doctor from './Doctor'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import DoctorCard from '../components/DoctorCard'
 
-const DoctorIntro = () => {	
-	const [hospitalNames, setHospitalNames] = useState(null)
+const DoctorIntro = ({hospitalName}) => {	
+	const [doctorNames, setDoctorNames] = useState(null)
 	
-	const fetchHospitalNames = () => {
-		axios.get('http://localhost:4000/hospitals/fetch-names')
+	const fetchDoctors = () => {
+		axios.get('http://localhost:4000/doctors/fetchByHospital?name=' + hospitalName)
 		.then((res) => 
 		{
-			setHospitalNames(res.data[0])
-			
+			setDoctorNames(res.data[0])
 		})
 		.catch((err) => 
 		{
@@ -19,13 +18,14 @@ const DoctorIntro = () => {
 		});
 	};
 	useEffect(() => {
-		fetchHospitalNames()
+		fetchDoctors()
 	}, []);
 
-	if(hospitalNames == null)
+	if(doctorNames == null)
 	{
 		return;
 	}
+
 	return (
 		<div class="flex flex-col items-center pt-12">
 			<h1 class="text-3xl text-center font-semibold"> Meet our Doctors </h1>
@@ -33,8 +33,8 @@ const DoctorIntro = () => {
 				Well qualified doctors are ready to serve you.
 			</h1>
 			<div class="grid grid-cols-2 gap-16 pt-10">
-				{hospitalNames.map((name, index) =>
-					<Doctor key={index} id={index} name={name.HastaneAdi}> </Doctor>
+				{doctorNames.map((doctor, index) =>
+					<DoctorCard key={index} id={index} name={doctor.Isim} surname={doctor.Soyisim} unvan={doctor.Unvan} brans={doctor.Brans} > </DoctorCard>
 				)}
 			</div>
 		</div>

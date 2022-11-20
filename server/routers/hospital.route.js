@@ -8,4 +8,9 @@ router.route('/fetch-names').get(async (req, res, next) => {
     res.json(hospitals);
 });
 
+router.route('/').get(async (req, res, next) => {
+    const hospitals = await sequelize.query(queries['find-all-hospital'])
+    res.json(hospitals);
+});
+
 module.exports = router;

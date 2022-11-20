@@ -1,9 +1,9 @@
 import Introduction from './Introduction'
 import Services from './Services'
-import DoctorIntro from './DoctorIntro'
 import '../output.css'
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import HospitalIntro from './HospitalIntro';
 
 const Home = () => {
 	return (
@@ -12,7 +12,7 @@ const Home = () => {
 				<div class="mb-auto">
 					<Introduction />
 					<Services />
-					<DoctorIntro />
+					<HospitalIntro />
 				</div>
 			</div>
 		</div>

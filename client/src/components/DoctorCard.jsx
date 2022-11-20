@@ -1,6 +1,6 @@
 import '../output.css'
 
-const Doctor = ({ id, name}) => {
+const DoctorCard = ({ id, name, surname, unvan, brans}) => {
 	return (
 		<div class="rounded-3xl font-semibold pt-8 space-y-4 shadow-[3px_3px_10px_4px_rgba(0,0,0,0.3)] w-[25rem] h-[25rem] flex flex-col items-center">
 			<div class="transform hover:rotate rounded-3xl bg-blue-500 w-[15rem] h-[10rem] flex flex-col items-center ">
@@ -10,12 +10,12 @@ const Doctor = ({ id, name}) => {
 					alt="doctor"
 				></img>
 			</div>
-			<h1> Doctor Name: {name} </h1>
-			<h1> Speciality</h1>
+			<h1> {unvan}. {name} {surname} </h1>
+			<h1> {brans} </h1>
 			<button class="border border-xl rounded-xl text-blue-700 border-blue-700 hover:bg-blue-700 hover:text-white p-4">
 				Book an Appointment
 			</button>
 		</div>
 	)
 }
-export default Doctor
+export default DoctorCard

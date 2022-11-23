@@ -15,7 +15,7 @@ const App = () => {
 	const [token, setToken] = useState()
 
 	return (
-		<div class="flex flex-col h-screen justify-center">
+		<div class="flex flex-col justify-center">
 			<Navbar />
 			<main class="mb-auto">
 				<Router>

@@ -1,5 +1,6 @@
 import '../output.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const DoctorAdmin = () => {
     const [showAppointment, setShowAppointment] = useState(false);
@@ -10,11 +11,33 @@ const DoctorAdmin = () => {
         setShowAppointment(false)
     }
 
+    const [hospitalNames, setHospitalNames] = useState(null)
+	
+	const fetchHospitals = () => {
+		axios.get('http://localhost:4000/hospitals/')
+		.then((res) => 
+		{
+			setHospitalNames(res.data[0])
+		})
+		.catch((err) => 
+		{
+			console.log(err);
+		});
+	};
+	useEffect(() => {
+		fetchHospitals()
+	}, []);
+
+	if(hospitalNames == null)
+	{
+		return;
+	}
+
     const MakeAppointment = () =>
     {
         return (
             <div class="bg-black bg-opacity-50 flex overflow-x-auto overflow-y-auto fixed top-0 right-0 left-0 right-0 z-50 p-4 w-full h-full">
-                <div class="w-1/2 h-3/4 m-auto flex flex-col rounded-xl bg-indigo-300">
+                <div class="w-1/2 h-3/4 border-4 p-4 m-auto flex flex-col rounded-xl bg-indigo-300">
                     <button class="text-white hover:cursor-pointer font-semibold text-2xl ml-4 mt-4 bg-red-600 border-2 rounded-full flex items-center justify-center w-10 h-10" onClick={popDownAppointment}> X </button>
                     <span class="block text-3xl mx-auto mb-16 pt-16 "> Make an Appointment </span>
                     <form class="w-full flex flex-col ">
@@ -53,7 +76,12 @@ const DoctorAdmin = () => {
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                                     Hastane
                                 </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Ankara Devlet"></input>
+                                <input type="text" list="browsers" name="myBrowser" />
+                                <datalist id="browsers" >
+                                    {hospitalNames.map((item, index) => {
+                                        return <option value={item.HastaneAdi}> {item.HastaneAdi} </option>
+                                    })}                                        
+                                </datalist>
                             </div>
                             <button class="bg-gray-200 py-2 px-12 rounded mx-auto"> Ara </button>
                         </div>

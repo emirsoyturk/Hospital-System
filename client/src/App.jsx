@@ -8,23 +8,27 @@ import SignUp from './components/Login/SignUp'
 import Hospital from './pages/Hospital'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import DoctorAdmin from './pages/DoctorAdmin'
+import PatientAdmin from './pages/PatientAdmin'
 import { useState } from 'react'
 
 const App = () => {
 	const [token, setToken] = useState()
 
 	return (
-		<div class="flex flex-col ">
+		<div class="flex flex-col h-screen justify-center">
 			<Navbar />
-			<Router>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/SignIn" element={<SignIn />} />
-					<Route path="/SignUp" element={<SignUp />} />
-					<Route path="/Profile" element={<DoctorAdmin />} />
-					<Route path="/Hospital/:id" element={<Hospital />} />
-				</Routes>
-			</Router>
+			<main class="mb-auto">
+				<Router>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/SignIn" element={<SignIn />} />
+						<Route path="/SignUp" element={<SignUp />} />
+						<Route path="/DoctorPage" element={<DoctorAdmin />} />
+						<Route path="/Profile" element={<PatientAdmin />} />
+						<Route path="/Hospital/:id" element={<Hospital />} />
+					</Routes>
+				</Router>
+			</main>
 			<Footer />
 		</div>
 	)

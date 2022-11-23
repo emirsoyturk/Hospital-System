@@ -15,12 +15,8 @@ const DoctorAdmin = () => {
 						<h1 class="text-xs"> Appointments </h1>
 					</li>
 					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
-						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/970/970450.png" alt="" />
-						<h1 class="text-xs"> Tables </h1>
-					</li>
-					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
-						<h1 class="text-xs"> Articles </h1>
+						<h1 class="text-xs"> Clients </h1>
 					</li>
 					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/482/482636.png" alt="" />
@@ -39,13 +35,10 @@ const DoctorAdmin = () => {
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250740.png" alt="" />
 						3000 Patient Treated
 					</div>
-					<div class="col-start-3 col-span-2 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-16 p-4">
-						Rating
-					</div>
-					<div class="col-start-1 col-span-4 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-40 p-4">
+					<div class="col-start-1 col-span-4 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-[20rem] p-4">
 						<Appointments />
 					</div>
-					<div class="col-start-5 col-span-2 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-40 p-4">
+					<div class="col-start-5 col-span-2 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-[20rem] p-4">
 						<h1 class="text-indigo-600 text-lg"> Most visited clients </h1>
 
 						<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -73,12 +66,6 @@ const DoctorAdmin = () => {
 						<h1 class="float-right font-light text-indigo-500 hover:cursor-pointer  hover:">
 							See more
 						</h1>
-					</div>
-					<div class="col-start-1 col-span-4 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-40 p-4">
-						Total Earning
-					</div>
-					<div class="col-start-5 col-span-2 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-40 p-4">
-						Announcements
 					</div>
 				</div>
 			</div>

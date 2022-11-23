@@ -3,7 +3,7 @@
 		"username": "emir",
 		"password": "password",
 		"database": "healthmanagementsystem",
-		"host": "172.29.96.1",
+		"host": "10.3.142.121",
 		"dialect": "mysql"
 	},
 	"test": {

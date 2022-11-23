@@ -1,8 +1,7 @@
 import Introduction from './Introduction'
 import Services from './Services'
 import '../output.css'
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import HospitalIntro from './HospitalIntro';
 
 const Home = () => {

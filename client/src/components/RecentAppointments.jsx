@@ -8,7 +8,7 @@ const Appointments = ({id}) => {
 	const [appointments, setAppointments] = useState([])
 
 	useEffect(() => {
-		axios.get('http://localhost:4000/doctors/futureAppointments?id=' + id)
+		axios.get('http://localhost:4000/doctors/recentAppointments?id=' + id)
 			.then(res => {
 				setAppointments(res.data[0])
 			})
@@ -21,7 +21,7 @@ const Appointments = ({id}) => {
 
 	return (
 		<div>
-			<h1 class="text-indigo-600 text-lg mb-8"> Appointment requests </h1>
+			<h1 class="text-indigo-600 text-lg mb-8"> Recent appointments </h1>
 			<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 				<thead>
 					<tr >

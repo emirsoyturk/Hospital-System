@@ -2,7 +2,6 @@ import Introduction from './Introduction'
 import Services from './Services'
 import '../output.css'
 import React from 'react';
-import HospitalIntro from './HospitalIntro';
 
 const Home = () => {
 	return (
@@ -11,7 +10,6 @@ const Home = () => {
 				<div class="mb-auto">
 					<Introduction />
 					<Services />
-					<HospitalIntro />
 				</div>
 			</div>
 		</div>

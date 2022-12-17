@@ -3,8 +3,9 @@ const router = express.Router()
 const { sequelize } = require('../models')
 const { queries } = require('../queries')
 
-router.route('/fetch').get((req, res, next) => {
-    res.json("Deneme");
+router.route('/fetchFields').get(async (req, res) => {
+    const fields = await sequelize.query(queries['find-all-fields'])
+    res.json(fields);
 });
 
 router.route('/fetchByHospital').get(async (req, res) => {
@@ -13,5 +14,35 @@ router.route('/fetchByHospital').get(async (req, res) => {
     console.log(doctors)
     res.json(doctors);
 });
+
+router.route('/fetchDoctorNameWithID').get(async (req, res) => {
+    let doctorID = req.query.id
+    const doctor = await sequelize.query(queries['find-doctor-name-by-id'] + "'" + doctorID + "'")
+    console.log(doctor)
+    res.json(doctor);
+});
+
+router.route('/appointments').get(async (req, res) => {
+    let doctorID = req.query.id
+    const appointments = await sequelize.query(queries['find-appointments-by-doctor-id'] + "'" + doctorID + "'")
+    console.log(appointments)
+    res.json(appointments);
+});
+
+
+router.route('/futureAppointments').get(async (req, res) => {
+    let doctorID = req.query.id
+    const appointments = await sequelize.query(queries['find-appointments-by-doctor-id-after-today'] + "'" + doctorID + "'")
+    console.log(appointments)
+    res.json(appointments);
+});
+
+router.route('/recentAppointments').get(async (req, res) => {
+    let doctorID = req.query.id
+    const appointments = await sequelize.query(queries['find-appointments-by-doctor-id-before-today'] + "'" + doctorID + "'")
+    console.log(appointments)
+    res.json(appointments);
+});
+
 
 module.exports = router;

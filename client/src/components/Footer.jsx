@@ -2,7 +2,7 @@ import '../output.css'
 
 const Footer = () => {
 	return (
-		<footer class="px-4 mt-8 bg-gray-200 py-6 rounded-lg flex items-center justify-between dark:bg-gray-800">
+		<footer class="px-4 mt-8 bg-gray-200 py-6 rounded-lg flex items-center h-10 justify-between dark:bg-gray-800">
 			<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
 				© 2022 Sic est Scriptum™ . All Rights Reserved.
 			</span>

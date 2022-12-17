@@ -8,6 +8,16 @@ router.route('/fetch-names').get(async (req, res, next) => {
     res.json(hospitals);
 });
 
+router.route('/fetch-all-cities').get(async (req, res, next) => {
+    const cities = await sequelize.query(queries['find-all-cities'])
+    res.json(cities);
+});
+
+router.route('/fetch-all-district').get(async (req, res, next) => {
+    const district = await sequelize.query(queries['find-all-district'])
+    res.json(district);
+});
+
 router.route('/').get(async (req, res, next) => {
     const hospitals = await sequelize.query(queries['find-all-hospital'])
     res.json(hospitals);

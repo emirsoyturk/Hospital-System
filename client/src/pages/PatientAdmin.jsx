@@ -4,31 +4,57 @@ import axios from 'axios';
 
 const DoctorAdmin = () => {
     const [showAppointment, setShowAppointment] = useState(false);
+    const [hospital, setHospital] = useState([])
+    const [field, setField] = useState([]);
+    const [cities, setCities] = useState([]);
+    const [district, setDistrict] = useState([]);
     const popUpAppointment = () => {
         setShowAppointment(true)
     }
     const popDownAppointment = () => {
         setShowAppointment(false)
     }
-
-    const [hospitalNames, setHospitalNames] = useState(null)
 	
 	const fetchHospitals = () => {
 		axios.get('http://localhost:4000/hospitals/')
 		.then((res) => 
 		{
-			setHospitalNames(res.data[0])
+			setHospital(res.data[0])
 		})
-		.catch((err) => 
-		{
-			console.log(err);
-		});
 	};
+
+    const fetchCities = () => {
+		axios.get('http://localhost:4000/hospitals/fetch-all-cities')
+		.then((res) => 
+		{
+			setCities(res.data[0])
+		})
+	};
+
+    const fetchDistrict = () => {
+		axios.get('http://localhost:4000/hospitals/fetch-all-district')
+		.then((res) => 
+		{
+			setDistrict(res.data[0])
+		})
+	};
+
+    const fetchField = () => {
+        axios.get("http://localhost:4000/doctors/fetchFields/")
+        .then((res) =>
+        {
+            setField(res.data[0])
+        })
+    }
+
 	useEffect(() => {
 		fetchHospitals()
+        fetchField()
+        fetchCities()
+        fetchDistrict()
 	}, []);
 
-	if(hospitalNames == null)
+	if(hospital == null || field == null || cities == null || district == null)
 	{
 		return;
 	}
@@ -42,44 +68,47 @@ const DoctorAdmin = () => {
                     <span class="block text-3xl mx-auto mb-16 pt-16 "> Make an Appointment </span>
                     <form class="w-full flex flex-col ">
                         <div class="flex flex-wrap">
-                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                    Isim
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Berfin"></input>
-                            </div>
-                            <div class="w-full md:w-1/2 px-3">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                    Soyisim
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Ozcubuk"></input>
-                            </div>
-                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                            <div class="w-full md:w-1/2 px-3 mb-6 ">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     Il
                                 </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Ankara"></input>
-                            </div>
-                            <div class="w-full md:w-1/2 px-3 mb-6">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                    Ilce
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Golbasi"></input>
-                            </div>
-                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                    Klinik
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="KBB"></input>
+                                <input placeholder="Ankara" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="cities" name="cityList" />
+                                <datalist id="cities" >
+                                    {cities.map((item, index) => {
+                                        return <option key={index} value={item.Il}> </option>
+                                    })}                                        
+                                </datalist>
                             </div>
                             <div class="w-full md:w-1/2 px-3 mb-6 ">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    Ilce
+                                </label>
+                                <input placeholder="Golbasi" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="district" name="districtList" />
+                                <datalist id="district" >
+                                    {district.map((item, index) => {
+                                        return <option key={index} value={item.Ilce}> </option>
+                                    })}                                        
+                                </datalist>
+                            </div>
+                            <div class="w-full md:w-1/2 px-3 mb-6 ">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    Alan
+                                </label>
+                                <input placeholder="Kulak Burun Boğaz" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="fields" name="fieldList" />
+                                <datalist id="fields" >
+                                    {field.map((item, index) => {
+                                        return <option key={index} value={item.Brans}> </option>
+                                    })}                                        
+                                </datalist>
+                            </div>
+                            <div class="w-full md:w-1/2 px-3 mb-6 ">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     Hastane
                                 </label>
-                                <input type="text" list="browsers" name="myBrowser" />
-                                <datalist id="browsers" >
-                                    {hospitalNames.map((item, index) => {
-                                        return <option value={item.HastaneAdi}> {item.HastaneAdi} </option>
+                                <input placeholder="Ankara Devlet" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="hospitals" name="hospitalList" />
+                                <datalist id="hospitals" >
+                                    {hospital.map((item, index) => {
+                                        return <option key={index} value={item.HastaneAdi}> </option>
                                     })}                                        
                                 </datalist>
                             </div>

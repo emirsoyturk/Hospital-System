@@ -2,8 +2,6 @@ import '../output.css'
 import {PropTypes} from 'prop-types'
 
 const Navbar = ({userType}) => {
-	console.log("NAV type: " + userType)
-
 	return (
 		<nav class="px-8 py-3 bg-[#f1f5fc]">
 			<div class="container flex flex-wrap justify-between items-center mx-auto">

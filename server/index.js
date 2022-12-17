@@ -63,13 +63,3 @@ db.sequelize.sync().then(() => {
 	})
 
 })
-
-app.get("/", (req, res) => {
-	res.send("Deneme")
-})
-
-
-const find = async () => {
-	const doctors = await sequelize.query(queries['find-all-doctors'])
-	console.log(doctors)
-}

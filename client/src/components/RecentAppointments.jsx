@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { PropTypes } from 'prop-types'
 
 
-
-const Appointments = ({id}) => {
+const RecentAppointments = ({id, popUpAppointment}) => {
 
 	const [appointments, setAppointments] = useState([])
 
@@ -16,8 +16,6 @@ const Appointments = ({id}) => {
 				console.log(err)
 			})
 	}, [])	
-
-	console.log(appointments)
 
 	return (
 		<div>
@@ -33,7 +31,7 @@ const Appointments = ({id}) => {
 				</thead>
 				<tbody class="">
 					{appointments.map(appointment => (
-						<tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800">
+						<tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800" onClick={popUpAppointment}>
 							<td class="py-3 px-6">
 								<div class="flex items-center">
 									<div class="ml-3">
@@ -83,4 +81,4 @@ const Appointments = ({id}) => {
 	)
 }
 
-export default Appointments
+export default RecentAppointments

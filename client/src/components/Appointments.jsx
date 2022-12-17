@@ -17,8 +17,6 @@ const Appointments = ({id}) => {
 			})
 	}, [])	
 
-	console.log(appointments)
-
 	return (
 		<div>
 			<h1 class="text-indigo-600 text-lg mb-8"> Appointment requests </h1>
@@ -32,8 +30,8 @@ const Appointments = ({id}) => {
 					</tr>
 				</thead>
 				<tbody class="">
-					{appointments.map(appointment => (
-						<tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800">
+					{appointments.map((appointment, i) => (
+						<tr key={i} class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800">
 							<td class="py-3 px-6">
 								<div class="flex items-center">
 									<div class="ml-3">

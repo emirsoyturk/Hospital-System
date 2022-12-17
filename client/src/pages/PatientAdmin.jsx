@@ -2,7 +2,7 @@ import '../output.css'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const DoctorAdmin = () => {
+const PatientAdmin = () => {
     const [showAppointment, setShowAppointment] = useState(false);
     const [hospital, setHospital] = useState([])
     const [field, setField] = useState([]);
@@ -172,4 +172,4 @@ const DoctorAdmin = () => {
 	)
 }
 
-export default DoctorAdmin
+export default PatientAdmin

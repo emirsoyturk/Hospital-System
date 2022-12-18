@@ -19,11 +19,17 @@ queries = {
 	'find-appointments-by-doctor-id': 'Select * from randevu join hasta on TCKimlikNo = HastaTCNo where DoktorTCNo = ', // Add TCKimlikNo after query;
 	'find-appointments-by-doctor-id-before-today': 'Select * from randevu join hasta on TCKimlikNo = HastaTCNo where  TARIH < now()  and DoktorTCNo = ',
 	'find-appointments-by-doctor-id-after-today': 'Select * from randevu join hasta on TCKimlikNo = HastaTCNo where  TARIH >= now()  and DoktorTCNo = ',
-	'find-recent-appointment-by-patient-id': 'SELECT doktor.isim, doktor.soyisim, unvan, brans, hastaneadi, tarih FROM doktor as doktor, hasta as hasta, randevu as randevu WHERE doktor.tckimlikno = randevu.doktortcno and hasta.tckimlikno = randevu.hastatcno and tarih <= NOW() and hastatcno = ',
+	'find-recent-appointment-by-patient-id': 'SELECT doktor.isim, doktor.soyisim, unvan, brans, hastaneadi, tarih, randevuNo FROM doktor as doktor, hasta as hasta, randevu as randevu WHERE doktor.tckimlikno = randevu.doktortcno and hasta.tckimlikno = randevu.hastatcno and tarih <= NOW() and hastatcno = ',
 	'find-future-appointment-by-patient-id': 'SELECT doktor.isim, doktor.soyisim, unvan, brans, hastaneadi, tarih FROM doktor as doktor, hasta as hasta, randevu as randevu WHERE doktor.tckimlikno = randevu.doktortcno and hasta.tckimlikno = randevu.hastatcno and tarih > NOW() and hastatcno = ',
 	'find-all-medicines': 'Select * from ilac',
+	'find-direct-patient-by-id': 'Select * from hasta where TCKimlikNo = ', // Add TCKimlikNo after query;
+	'find-medicine-detail-by-appointment-id': 'Select * from recete where randevuno = ', // Add randevuNo after query;
+	'find-analysis-detail-by-appointment-id': 'Select * from tahlil where randevuno = ', // Add randevuNo after query;
+	'find-disease-detail-by-appointment-id': 'Select * from hastalik where randevuno = ', // Add randevuNo after query;
+	'find-report-detail-by-appointment-id': 'Select * from rapor where randevuno = ', // Add randevuNo after query;
 	'count-all-appointments-by-doctor-id': 'Select count(*) as total from randevu where DoktorTCNo = ', // Add TCKimlikNo after query;
 	'find-appoinment-by-patient-id': 'SELECT doktor.isim, doktor.soyisim, unvan, brans, hastaneadi, tarih FROM doktor as doktor, hasta as hasta, randevu as randevu WHERE doktor.tckimlikno = randevu.doktortcno and hasta.tckimlikno = randevu.hastatcno and hasta.tckimlikno = ', // Add TCKimlikNo after query;
+	'find-appointment-analysis-by-id-and-randevu-no': 'Select * from tahlil where detayno = ', // Add detayNo after query; 
 }
 
 const add_medicine = (detayNo, randevuNo, IlacAdi, Aciklama, Tur, Doz, Periyot) => {

@@ -119,14 +119,14 @@ public class Gen {
         }
         else
         {
-            hastaNum = 100;
+            hastaNum = 40;
             hastaneNum = 5;
             doktorNum = 40;
-            randevuNum = 1000;
-            ilacNum = 20;
-            raporNum = 40;
-            hastalikNum = 20;
-            tahlilNum = 10;
+            randevuNum = 50;
+            ilacNum = 60;
+            raporNum = 1000;
+            hastalikNum = 300;
+            tahlilNum = 1000;
             receteNum = 10;
         }
 

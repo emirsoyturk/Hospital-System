@@ -63,13 +63,15 @@ const RecentDoctors = ({id, setUserType}) => {
 					<li>
 						<a href='/Doctors' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
 							<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
-							<h1 class="text-xs"> Doctors </h1>
+							<h1 class="text-xs"> Appointments </h1>
 						</a>
 					</li>
-					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
-						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/482/482636.png" alt="" />
-						<h1 class="text-xs"> Profile </h1>
-					</li>
+					<li class="r">
+                    <a href="/Profile" class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
+                    <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/482/482636.png" alt="" />
+                    <h1 class="text-xs"> Profile </h1>
+                    </a>
+                    </li>
                     <li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer" onClick={Logout}>
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1243/1243950.png" alt="" />
 						<h1 class="text-xs"> Log out </h1>
@@ -131,11 +133,7 @@ const RecentDoctors = ({id, setUserType}) => {
                     ))}
                 </tbody>
             </table>
-            <div class="mt-auto mb-0">
-                <h1 class="float-right font-light text-indigo-500 hover:cursor-pointer">
-                    See more
-                </h1>
-            </div>
+
             </div>
             
         </div>

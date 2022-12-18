@@ -14,6 +14,9 @@ import Calendar from './pages/Calendar'
 import Doctors from './pages/Doctors'
 import Appointments from './pages/Appointments'
 import Clients from './pages/Clients'
+import DoctorProfile from './pages/DoctorProfile'
+import PatientProfile from './pages/PatientProfile'
+
 
 const App = () => {
 	const [userType, setUserType] = useState('');
@@ -85,6 +88,12 @@ const App = () => {
 							}
 							{
 								userType === 'patient' && <Route path="/Appointments" element={<Appointments id={token}/>} />
+							}
+							{
+								userType === 'doctor' && <Route path="/Profile" element={<DoctorProfile id={token}/>} />
+							}
+							{
+								userType === 'patient' && <Route path="/Profile" element={<PatientProfile id={token}/>} />
 							}
 
 						</Routes>

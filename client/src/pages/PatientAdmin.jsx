@@ -6,6 +6,12 @@ import { useNavigate } from 'react-router-dom';
 const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
     const [showAppointment, setShowAppointment] = useState(false);
     const [patientName, setPatientName] = useState("")
+	const [showAppointmentDetail, setShowAppointmentDetail] = useState(false)
+	const [medicineDetails, setMedicineDetails] = useState([])
+	const [reportDetails, setReportDetails] = useState([])
+	const [analysisDetails, setAnalysisDetails] = useState([])
+	const [diseaseDetails, setDiseaseDetails] = useState([])
+	
      
     const popUpAppointment = () => {
         setShowAppointment(true)
@@ -27,7 +33,6 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 		.then((res) =>
 		{
 			setPatientName(res.data[0][0])
-			console.log(res.data[0][0])
 		}
 		)
 	}
@@ -182,6 +187,123 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
         )
     }
 
+	const AppointmentDetails = () => {
+		return (
+			<div class="bg-black bg-opacity-50 flex overflow-x-auto overflow-y-auto fixed top-0 right-0 left-0 right-0 z-50 p-4 w-full h-full">
+				<div class="bg-white w-full h-full rounded-lg p-4">
+					<button class="text-white hover:cursor-pointer font-semibold text-2xl ml-4 mt-4 bg-red-600 border-2 rounded-full flex items-center justify-center w-10 h-10" onClick={e => setShowAppointmentDetail(false)}> X </button>
+					<div class="grid grid-cols-4 gap-6 mt-16">
+						<div class="flex flex-col justify-center text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl">
+							<span class="text-2xl font-bold -translate-y-[260px]"> Medicine Detail </span>
+							<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+							<thead class="-translate-y-[260px]">
+								<tr >
+									<th class="py-3 px-10"> IlacAdi </th>
+									<th class="py-3 px-10"> Doz </th>
+									<th class="py-3 px-10"> Periyot </th>
+									<th class="py-3 px-10"> Tur </th>
+								</tr>
+							</thead>
+							<tbody class="">
+								{
+									medicineDetails.map((item, index) => {
+										return (
+											<tr key={index}>
+												<td class="py-3 px-10"> {item.IlacAdi} </td>
+												<td class="py-3 px-10"> {item.Doz} </td>
+												<td class="py-3 px-10"> {item.Periyot} </td>
+												<td class="py-3 px-10"> {item.Tur} </td>
+											</tr>
+										)
+									})
+								}
+							</tbody>
+						</table>
+						</div>
+						<div class="flex flex-col justify-center text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl">
+							<span class="ml-8 text-2xl font-bold -translate-y-[260px]"> Analysis Detail </span>
+							<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+							<thead class="-translate-y-[260px]">
+								<tr >
+									<th class="py-3 px-10"> TestGorseli </th>
+									<th class="py-3 px-10"> Aciklama </th>
+									<th class="py-3 px-10"> Tur </th>
+								</tr>
+							</thead>
+							<tbody class="">
+								{
+									analysisDetails.map((item, index) => {
+										return (
+											<tr key={index}>
+												<td class="py-3 px-10"> {item.IlacAdi} </td>
+												<td class="py-3 px-10"> {item.Doz} </td>
+												<td class="py-3 px-10"> {item.Periyot} </td>
+											</tr>
+										)
+									})
+								}
+							</tbody>
+						</table>
+
+						</div>
+						<div class="flex  flex-col justify-center p-6 text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl" >
+							<span class="text-2xl font-bold"> Disease Detail </span>
+							<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+							<thead >
+								<tr >
+									<th class="py-3 px-10"> Aciklama </th>
+									<th class="py-3 px-10"> Belirtiler </th>
+									<th class="py-3 px-10"> Tur </th>
+								</tr>
+							</thead>
+							<tbody class="">
+								{
+									diseaseDetails.map((item, index) => {
+										return (
+											<tr key={index}>
+												<td class="py-3 px-10"> {item.Aciklama} </td>
+												<td class="py-3 px-10"> {item.Belirtiler} </td>
+												<td class="py-3 px-10"> {item.Tur} </td>
+											</tr>
+										)
+									})
+								}
+							</tbody>
+						</table>
+						</div>
+
+						<div class="flex flex-col justify-center p-6 text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl" >
+							<span class="text-2xl font-bold -translate-y-[260px]"> Report Detail </span>
+							<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+							<thead class="-translate-y-[260px]">
+								<tr >
+									<th class="py-3 px-10"> RaporSuresi </th>
+									<th class="py-3 px-10"> Aciklama </th>
+									<th class="py-3 px-10"> Tur </th>
+								</tr>
+							</thead>
+							<tbody class="">
+								{
+									reportDetails.map((item, index) => {
+										return (
+											<tr key={index}>
+												<td class="py-3 px-10"> {item.RaporSuresi} </td>
+												<td class="py-3 px-10"> {item.Doz} </td>
+												<td class="py-3 px-10"> {item.Periyot} </td>
+											</tr>
+										)
+									})
+								}
+							</tbody>
+						</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+
+
     const sqlDateToJsDate = (sqlDate) => {
 		var sqlDateArr1 = sqlDate.split("-");
 		var sYear = sqlDateArr1[0];
@@ -196,6 +318,25 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 		
 		return jsDate;
 	}
+
+	const openAppointment = (appointment) => {
+		axios.get('http://localhost:4000/patients/fetch-appointment-detail-by-appointment-id' + "?id=" + appointment.randevuNo)
+		.then((res) =>
+		{
+			console.log(res.data.medicineDetail[0])
+			setMedicineDetails(res.data.medicineDetail[0])
+			setAnalysisDetails(res.data.analysisDetail[0])
+			setDiseaseDetails(res.data.diseaseDetail[0])
+			setReportDetails(res.data.reportDetail[0])
+		}
+		)
+		.catch(err => {
+			console.log(err)
+		}
+		)
+		setShowAppointmentDetail(true)
+	}
+
 
     const PatientIncomingAppointments = () => {
 
@@ -305,7 +446,7 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 					<tbody class="">
 						{appointments.map((appointment, i) => (
 							i < 8 &&
-							<tr key={i} class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800">
+							<tr key={i} onClick={e => openAppointment(appointment)} class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800">
 								<td class="py-3 px-6">
 									<div class="flex items-center">
 										<div class="ml-3">
@@ -373,13 +514,15 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 					<li class="">
 						<a href="/Doctors" class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
-						<h1 class="text-xs"> Doctors </h1>
+						<h1 class="text-xs"> Appointments </h1>
 						</a>
 					</li>
-					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
-						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/482/482636.png" alt="" />
-						<h1 class="text-xs"> Profile </h1>
-					</li>
+					<li class="r">
+                    <a href="/Profile" class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
+                    <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/482/482636.png" alt="" />
+                    <h1 class="text-xs"> Profile </h1>
+                    </a>
+                	</li>
 					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer" onClick={Logout}>
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1243/1243950.png" alt="" />
 						<h1 class="text-xs"> Log out </h1>
@@ -394,6 +537,9 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
                 </div>
                 {
                     showAppointment ? <MakeAppointment /> : null
+                }
+				{
+                    showAppointmentDetail ? <AppointmentDetails /> : null
                 }
 				<div class="grid grid-cols-6 px-8 py-8 gap-y-8 gap-x-12">
                     <div class="col-start-1 col-span-3 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] p-4 w-full">

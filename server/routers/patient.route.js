@@ -3,8 +3,10 @@ const router = express.Router()
 const { sequelize } = require('../models')
 const { queries, add_medicine, add_analysis, add_disease, add_report } = require('../queries')
 
-router.route('/fetch-names').get(async (req, res, next) => {
-    
+router.route('/fetch').get(async (req, res, next) => {
+    const id = req.query.id;
+    const patient = await sequelize.query(queries['find-direct-patient-by-id'] + id)
+    res.json(patient);
 });
 
 router.route('/fetch-all-medicines').get(async (req, res, next) => {
@@ -63,6 +65,27 @@ router.route('/fetch-patient-name').get(async (req, res, next) => {
     const patient = await sequelize.query(queries['find-patient-name-by-id'] + id)
     res.json(patient);
 });
+
+router.route('fetch-appointment-details').get(async (req, res, next) => {
+    const id = req.query.id;
+    const details = await sequelize.query(queries['find-appointment-details-by-id'] + id)
+    res.json(details);
+});
+
+router.route('/fetch-appointment-detail-by-appointment-id').get(async (req, res, next) => {
+    const id = req.query.id;
+    const medicineDetail = await sequelize.query(queries['find-medicine-detail-by-appointment-id'] + id)
+    const analysisDetail = await sequelize.query(queries['find-analysis-detail-by-appointment-id'] + id)
+    const diseaseDetail = await sequelize.query(queries['find-disease-detail-by-appointment-id'] + id)
+    const reportDetail = await sequelize.query(queries['find-report-detail-by-appointment-id'] + id)
+    res.json({
+        'medicineDetail': medicineDetail,
+        'analysisDetail': analysisDetail,
+        'diseaseDetail': diseaseDetail,
+        'reportDetail': reportDetail    
+    });
+});
+
 
 
 

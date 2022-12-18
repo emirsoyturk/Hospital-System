@@ -19,14 +19,15 @@ const sqlDateToJsDate = (sqlDate) => {
 }
 
 
-const Clients = ({id, setUserType}) => {
+const RecentDoctors = ({id, setUserType}) => {
 
     const [appointments, setAppointments] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get('http://localhost:4000/doctors/appointments?id=' + id)
+        axios.get('http://localhost:4000/patients/fetch-appointments?id=' + id)
             .then(res => {
+                console.log(res.data[0])
                 setAppointments(res.data[0])
             })
             .catch(err => {
@@ -54,15 +55,15 @@ const Clients = ({id, setUserType}) => {
                         </a>
 					</li>
 					<li>
-						<a href='/Calendar' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">  
+						<a href='/Appointments' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">  
 							<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250620.png" alt="" />
 							<span class="text-xs"> Calendar </span>
 						</a>
 					</li>
 					<li>
-						<a href='/Clients' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
+						<a href='/Doctors' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
 							<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
-							<h1 class="text-xs"> Clients </h1>
+							<h1 class="text-xs"> Doctors </h1>
 						</a>
 					</li>
 					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
@@ -76,14 +77,14 @@ const Clients = ({id, setUserType}) => {
 					
 				</ul>
 			</div>
-            <div class="pl-16 w-full">
+            <div class="pl-16 w-full px-32 py-10">
             <h1 class="text-indigo-600 text-3xl mb-8"> All appointments </h1>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead>
                     <tr >
-                        <th class="py-3 px-10"> TC </th>
                         <th class="py-3 px-10"> Name </th>
-                        <th class="py-3 px-10"> Disease </th>
+                        <th class="py-3 px-10"> Field </th>
+                        <th class="py-3 px-10"> Hospital </th>
                         <th class="py-3 px-10"> Date </th>
                     </tr>
                 </thead>
@@ -94,7 +95,7 @@ const Clients = ({id, setUserType}) => {
                                 <div class="flex items-center">
                                     <div class="ml-3">
                                         <p class="font-medium text-gray-900 dark:text-gray-100">
-                                            {appointment.TCKimlikNo}
+                                            {appointment.unvan + " " + appointment.isim + " " + appointment.soyisim}
                                         </p>
                                     </div>
                                 </div>
@@ -103,7 +104,7 @@ const Clients = ({id, setUserType}) => {
                                 <div class="flex items-center">
                                     <div class="ml-3">
                                         <p class="font-medium text-gray-900 dark:text-gray-100">
-                                            {appointment.Isim + " " + appointment.Soyisim}
+                                            {appointment.brans}
                                         </p>
                                     </div>
                                 </div>
@@ -112,7 +113,7 @@ const Clients = ({id, setUserType}) => {
                                 <div class="flex items-center">
                                     <div class="ml-3">
                                         <p class="font-medium text-gray-900 dark:text-gray-100">
-                                            {appointment.RandevuTuru}
+                                            {appointment.hastaneadi}
                                         </p>
                                     </div>
                                 </div>
@@ -121,7 +122,7 @@ const Clients = ({id, setUserType}) => {
                                 <div class="flex items-center">
                                     <div class="ml-3">
                                         <p class="font-medium text-gray-900 dark:text-gray-100">
-                                            {sqlDateToJsDate(appointment.Tarih).toLocaleString()}
+                                            {sqlDateToJsDate(appointment.tarih).toLocaleString()}
                                         </p>
                                     </div>
                                 </div>
@@ -141,4 +142,4 @@ const Clients = ({id, setUserType}) => {
     )
 }
 
-export default Clients
+export default RecentDoctors

@@ -128,7 +128,7 @@ const Appointments = ({id}) => {
                 <li>
                     <a href='/Calendar' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">  
                         <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250620.png" alt="" />
-                        <span class="text-xs"> Appointments </span>
+                        <span class="text-xs"> Calendar </span>
                     </a>
                 </li>
                 <li>

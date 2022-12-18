@@ -13,6 +13,7 @@ queries = {
 	'find-all-doctors-named': 'Select * From DOKTOR Where name like ', // Add doctor name after query;
 	'find-doctor-by-id': 'Select TCKimlikNO from doktor where TCKimlikNo = ', // Add TCKimlikNo after query;
 	'find-patient-by-id': 'Select TCKimlikNO from hasta where TCKimlikNo = ', // Add TCKimlikNo after query;
+	'find-patient-name-by-id': 'Select Isim, Soyisim from hasta where TCKimlikNo = ', // Add TCKimlikNo after query;
 	'find-doctor-name-by-id': 'Select Isim, Soyisim from doktor where TCKimlikNo = ', // Add TCKimlikNo after query;
 	'find-all-doctors-by-field-and-hospital': 'Select * from doktor where brans = ', // Add field name after query;
 	'find-appointments-by-doctor-id': 'Select * from randevu join hasta on TCKimlikNo = HastaTCNo where DoktorTCNo = ', // Add TCKimlikNo after query;

@@ -119,7 +119,7 @@ public class Gen {
         }
         else
         {
-            hastaNum = 1000;
+            hastaNum = 100;
             hastaneNum = 5;
             doktorNum = 40;
             randevuNum = 1000;

@@ -125,11 +125,11 @@ const Appointments = ({id}) => {
                 <li>
                     <a href='/Appointments' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">  
                         <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250620.png" alt="" />
-                        <span class="text-xs"> Appointments </span>
+                        <span class="text-xs"> Calender </span>
                     </a>
                 </li>
                 <li>
-                    <a href='/Clients' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
+                    <a href='/Doctors' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
                         <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
                         <h1 class="text-xs"> Doctors </h1>
                     </a>

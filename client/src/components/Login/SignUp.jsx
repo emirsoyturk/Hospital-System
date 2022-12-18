@@ -2,7 +2,7 @@ import '../../output.css'
 
 const SignUp = () => {
 	return (
-		<div class="flex rounded-2xl bg-slate-50 shadow-[20px_35px_20px_-15px_rgba(0,0,0,0.3)] w-[50rem] h-[40rem] mx-auto mb-10 mt-10">
+		<div class="flex rounded-2xl mt-32 bg-slate-50 shadow-[20px_35px_20px_-15px_rgba(0,0,0,0.3)] w-[50rem] h-[40rem] mx-auto mb-10 mt-10">
 			<div class="rounded-l-2xl bg-indigo-500 w-[10rem] h-[40rem]"></div>
 			<form class="px-8 justify-center flex flex-col space-y-4 ">
 				<h1 class="text-3xl pb-8"> Sign up for account </h1>

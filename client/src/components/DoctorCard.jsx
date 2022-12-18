@@ -11,7 +11,12 @@ const SmallCalender = ({setSelected, setDate}) => {
 		setDate(date)
 		setSelected(true)
 	}
+	const date = new Date();
 
+	let currentDay = date.getDate();
+	let month = date.getMonth();
+	let year = date.getFullYear();
+	const firstDayOfMonth = new Date(year, month, 1).getDay();
 
 
 	return (
@@ -31,21 +36,55 @@ const SmallCalender = ({setSelected, setDate}) => {
 					</tr>
 				</thead>
 				<tbody>
-					{
-					Array.from({ length: 5 }).map((_, j) => (
-						<tr class="text-center h-4">
-						{
-							Array.from({ length: 7 }).map((_, i) => (
-								(i + 1 + j * 7 < 31 && 
-								<td key={i} class="pt-6 rounded-xl hover:bg-blue-200" onClick={e => setAppointment(i + 1 + j * 7)}>
-									<div class="px-2 py-2 cursor-pointer flex w-full justify-center"> {i + 1 + j * 7} </div>
-								</td>
-								)
-							))
-						}
-						</tr>
-					))
-					}
+					<tr class="text-center h-20">
+                    {
+                        Array.from({ length: 7 }).map((_, i) => (
+                            i >= firstDayOfMonth - 1 ? 
+                            <td key={i} class="pt-6 rounded-xl hover:bg-blue-200" onClick={e => setAppointment(i - firstDayOfMonth + 1 )}>
+								<div class="px-2 py-2 cursor-pointer flex w-full justify-center"> {i - firstDayOfMonth + 1 + 1} </div>
+							</td>
+                            :
+                            <td class=""> </td>
+                        ))
+                    }
+                </tr>
+                <tr class="text-center h-20">
+                    {
+                        Array.from({ length: 7 }).map((_, i) => (
+                            <td key={i} class="pt-6 rounded-xl hover:bg-blue-200" onClick={e => setAppointment(i - firstDayOfMonth + 1 + 8)}>
+								<div class="px-2 py-2 cursor-pointer flex w-full justify-center"> {i - firstDayOfMonth + 1 + 8} </div>
+							</td>
+                        ))
+                    }
+                </tr>
+                <tr class="text-center h-20">
+                    {
+                        Array.from({ length: 7 }).map((_, i) => (
+                            <td key={i} class="pt-6 rounded-xl hover:bg-blue-200" onClick={e => setAppointment(i - firstDayOfMonth + 1 + 15)}>
+								<div class="px-2 py-2 cursor-pointer flex w-full justify-center"> {i - firstDayOfMonth + 1 + 15} </div>
+							</td>
+                        ))
+                    }
+                </tr>
+                <tr class="text-center h-20">
+                    {
+                        Array.from({ length: 7}).map((_, i) => (
+                            <td key={i} class="pt-6 rounded-xl hover:bg-blue-200" onClick={e => setAppointment(i - firstDayOfMonth + 1 + 22)}>
+								<div class="px-2 py-2 cursor-pointer flex w-full justify-center"> {i - firstDayOfMonth + 1 + 22} </div>
+							</td>
+                        ))
+                    }
+                </tr>
+                <tr class="text-center h-20">
+                    {
+                        Array.from({ length: 31 - 21 - firstDayOfMonth }).map((_, i) => (
+                            <td key={i} class="pt-6 rounded-xl hover:bg-blue-200" onClick={e => setAppointment(i - firstDayOfMonth + 1 + 27)}>
+								<div class="px-2 py-2 cursor-pointer flex w-full justify-center"> {i - firstDayOfMonth + 1 + 29} </div>
+							</td>
+                        ))
+                    }
+                </tr>
+					
 				</tbody>
 			</table>
 		</div>
@@ -77,7 +116,7 @@ const DoctorCard = ({ id, name, surname, unvan, brans}) => {
 	const RandevuAl = () =>
 	{
 		setSelected(false)
-		notify("Randevu alındı")
+		notify("Randevu alindi")
 		setTimeout(() => {
 			navigate('/Appointments')
 		}, 1000);

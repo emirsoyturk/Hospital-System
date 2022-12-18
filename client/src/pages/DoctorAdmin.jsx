@@ -50,7 +50,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 
 	const random8Digit = () => {
 		return Math.floor(10000000 + Math.random() * 90000000);
-	}	
+	}
 
 	const sqlDateToJsDate = (sqlDate) => {
 		var sqlDateArr1 = sqlDate.split("-");
@@ -498,7 +498,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 					<li>
 						<a href='/Calendar' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">  
 							<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250620.png" alt="" />
-							<span class="text-xs"> Appointments </span>
+							<span class="text-xs"> Calendar </span>
 						</a>
 					</li>
 					<li>

@@ -58,6 +58,13 @@ router.route('/fetch-future-appointments').get(async (req, res, next) => {
     res.json(appointments);
 });
 
+router.route('/fetch-patient-name').get(async (req, res, next) => {
+    const id = req.query.token
+    const patient = await sequelize.query(queries['find-patient-name-by-id'] + id)
+    res.json(patient);
+});
+
+
 
     
 

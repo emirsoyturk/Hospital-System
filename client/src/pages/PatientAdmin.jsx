@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
     const [showAppointment, setShowAppointment] = useState(false);
+    const [patientName, setPatientName] = useState("")
      
     const popUpAppointment = () => {
         setShowAppointment(true)
@@ -20,12 +21,28 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 		sessionStorage.removeItem('userType')
 	}
 
+	const fetchPatientName = () => {
+		console.log(token)
+		axios.get('http://localhost:4000/patients/fetch-patient-name' + "?token='" + token + "'")
+		.then((res) =>
+		{
+			setPatientName(res.data[0][0])
+			console.log(res.data[0][0])
+		}
+		)
+	}
+
+	useEffect(() => {
+		fetchPatientName()
+
+	}, [])
+
     const MakeAppointment = () =>
     {
-        const [selectedCity, setSelectedCity] = useState("Ankara");
-        const [selectedDistrict, setSelectedDistrict] = useState("Osmangazi");
-        const [selectedField, setSelectedField] = useState("Adli Tip");
-        const [selectedHospital, setSelectedHospital] = useState("Bestepe Devlet Hastanesi"); 
+        const [selectedCity, setSelectedCity] = useState("");
+        const [selectedDistrict, setSelectedDistrict] = useState("");
+        const [selectedField, setSelectedField] = useState("");
+        const [selectedHospital, setSelectedHospital] = useState(""); 
         const [hospital, setHospital] = useState([])
         const [field, setField] = useState([]);
         const [cities, setCities] = useState([]);
@@ -43,7 +60,6 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
             .then((res) =>
             {
                 const doctors = res.data[0];
-                console.table(doctors);
                 setSelectedDoctors(doctors);
                 navigate('/Doctors');
             }
@@ -189,7 +205,6 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 			axios.get('http://localhost:4000/patients/fetch-future-appointments?id=' + token)
 				.then(res => {
 					setAppointments(res.data[0])
-                    console.table(res.data[0])
 				})
 				.catch(err => {
 					console.log(err)
@@ -210,7 +225,7 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 					</thead>
 					<tbody class="">
 						{appointments.map((appointment, i) => (
-							i < 10 &&
+							i < 8 &&
 							<tr key={i} class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800">
 								<td class="py-3 px-6">
 									<div class="flex items-center">
@@ -253,7 +268,7 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 					</tbody>
 				</table>
 				<div class="mt-auto mb-0">
-					<a href="/Clients" class="float-right font-light text-indigo-500 hover:cursor-pointer">
+					<a href="/Doctors" class="float-right font-light text-indigo-500 hover:cursor-pointer">
 						See more
 					</a>
 				</div>
@@ -269,7 +284,6 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 			axios.get('http://localhost:4000/patients/fetch-recent-appointments?id=' + token)
 				.then(res => {
 					setAppointments(res.data[0])
-                    console.table(res.data[0])
 				})
 				.catch(err => {
 					console.log(err)
@@ -290,7 +304,7 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 					</thead>
 					<tbody class="">
 						{appointments.map((appointment, i) => (
-							i < 10 &&
+							i < 8 &&
 							<tr key={i} class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800">
 								<td class="py-3 px-6">
 									<div class="flex items-center">
@@ -333,7 +347,7 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 					</tbody>
 				</table>
 				<div class="mt-auto mb-0">
-					<a href="/Clients" class="float-right font-light text-indigo-500 hover:cursor-pointer">
+					<a href="/Doctors" class="float-right font-light text-indigo-500 hover:cursor-pointer">
 						See more
 					</a>
 				</div>
@@ -352,13 +366,15 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 					<li class="">
                         <a class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer" href="/Appointments">
                             <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250620.png" alt="" />
-                            <h1 class="text-xs"> Appointments </h1>
+                            <h1 class="text-xs"> Calendar </h1>
                         </a>
 						
 					</li>
-					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
+					<li class="">
+						<a href="/Doctors" class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
 						<h1 class="text-xs"> Doctors </h1>
+						</a>
 					</li>
 					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/482/482636.png" alt="" />
@@ -371,7 +387,14 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 				</ul>
 			</div>
 			<div class="bg-slate-100 col-start-2 col-span-11">
-				<h1 class="px-16 pt-8 text-xl font-bold text-indigo-700"> Welcome, Emir Soyturk </h1>
+                <div class="flex">
+                    <h1 class="px-16 pt-8 text-xl font-bold text-indigo-700"> Welcome {patientName.Isim + " " + patientName.Soyisim} </h1>
+                    <button onClick={popUpAppointment}  type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 translate-y-6 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"> Make an appointment </button>
+
+                </div>
+                {
+                    showAppointment ? <MakeAppointment /> : null
+                }
 				<div class="grid grid-cols-6 px-8 py-8 gap-y-8 gap-x-12">
                     <div class="col-start-1 col-span-3 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] p-4 w-full">
 						<PatientRecentAppointments />
@@ -379,22 +402,6 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
                     <div class="col-start-4 col-span-3 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] p-4 w-full">
 						<PatientIncomingAppointments />
 					</div>
-                    <div class="flex flex-col items-center col-start-1 col-span-3 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-[30rem] w-full p-4">
-                        <button class="hover:bg-indigo-400 hover:text-white hover:cursor-pointer border border-4 border-indigo-400 rounded-2xl p-2 mt-8 text-3xl text-indigo-600" onClick={popUpAppointment}> Make an appointment </button>
-                        <div class="mt-8 bg-blue-100 flex flex-col items-center w-3/4 h-1/2 space-y-2 rounded-2xl">
-                            <span class="m-4 "> Last appointment </span>
-                            <span class="text-2xl mx-auto "> Ankara Devlet </span>
-                            <span class="text-2xl mx-auto "> Prof. Berfin Ozcubuk</span>
-                            <span class="text-2xl mx-auto "> Estetik </span>
-                            {
-                                showAppointment ? <MakeAppointment /> : null
-                            }
-                        </div>
-                        
-                    </div>
-                    
-					
-                    
 				</div>
 			</div>
 		</div>

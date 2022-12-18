@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Footer from './components/Footer'
 import SignIn from './components/Login/SignIn'
+import SignUp from './components/Login/SignUp'
 import Hospital from './pages/Hospital'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import DoctorAdmin from './pages/DoctorAdmin'
@@ -47,6 +48,8 @@ const App = () => {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/SignIn" element={<SignIn setToken={setToken} setUserType={setUserType}/>} />
+						<Route path="/SignUp" element={<SignUp setToken={setToken} setUserType={setUserType}/>} />
+
 					</Routes>
 
 				</Router>
@@ -78,7 +81,7 @@ const App = () => {
 								userType === 'patient' && <Route path="/" element={<PatientAdmin token={token} setUserType={setUserType} setSelectedDoctors={setSelectedDoctors}/>} />
 							}
 							{
-								userType === 'patient' && <Route path="/Doctors" element={<Doctors selectedDoctors={selectedDoctors}/>} />
+								userType === 'patient' && <Route path="/Doctors" element={<Doctors id={token} setUserType={setUserType} selectedDoctors={selectedDoctors}/>} />
 							}
 							{
 								userType === 'patient' && <Route path="/Appointments" element={<Appointments id={token}/>} />

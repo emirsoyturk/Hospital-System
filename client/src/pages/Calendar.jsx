@@ -67,7 +67,7 @@ const Appointments = ({id}) => {
     const [appointment, setAppointment] = useState([])
 
     useEffect(() => {
-		axios.get('http://localhost:4000/doctors/futureAppointments?id=' + id)
+		axios.get('http://localhost:4000/doctors/appointments?id=' + id)
 			.then(res => {
 				setAppointment(res.data[0])
                 console.log(res.data[0])

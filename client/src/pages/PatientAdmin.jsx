@@ -4,77 +4,112 @@ import axios from 'axios';
 
 const PatientAdmin = () => {
     const [showAppointment, setShowAppointment] = useState(false);
-    const [hospital, setHospital] = useState([])
-    const [field, setField] = useState([]);
-    const [cities, setCities] = useState([]);
-    const [district, setDistrict] = useState([]);
+     
     const popUpAppointment = () => {
         setShowAppointment(true)
     }
     const popDownAppointment = () => {
         setShowAppointment(false)
     }
-	
-	const fetchHospitals = () => {
-		axios.get('http://localhost:4000/hospitals/')
-		.then((res) => 
-		{
-			setHospital(res.data[0])
-		})
-	};
-
-    const fetchCities = () => {
-		axios.get('http://localhost:4000/hospitals/fetch-all-cities')
-		.then((res) => 
-		{
-			setCities(res.data[0])
-		})
-	};
-
-    const fetchDistrict = () => {
-		axios.get('http://localhost:4000/hospitals/fetch-all-district')
-		.then((res) => 
-		{
-			setDistrict(res.data[0])
-		})
-	};
-
-    const fetchField = () => {
-        axios.get("http://localhost:4000/doctors/fetchFields/")
-        .then((res) =>
-        {
-            setField(res.data[0])
-        })
-    }
-
-	useEffect(() => {
-		fetchHospitals()
-        fetchField()
-        fetchCities()
-        fetchDistrict()
-	}, []);
-
-	if(hospital == null || field == null || cities == null || district == null)
-	{
-		return;
-	}
 
     const MakeAppointment = () =>
     {
+        const [selectedCity, setSelectedCity] = useState("");
+        const [selectedDistrict, setSelectedDistrict] = useState("");
+        const [selectedField, setSelectedField] = useState("");
+        const [selectedHospital, setSelectedHospital] = useState(""); 
+        const [hospital, setHospital] = useState([])
+        const [field, setField] = useState([]);
+        const [cities, setCities] = useState([]);
+        const [district, setDistrict] = useState([]);
+        
+        
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            console.log(selectedCity);
+            console.log(selectedDistrict);
+            console.log(selectedField);
+            console.log(selectedHospital);
+            axios.get('http://localhost:4000/hospitals/fetch-all-doctors-by-field-and-hospital' + "?hospital='" + selectedHospital.trim() + "'&field='" + selectedField.trim() + "'")
+            .then((res) =>
+            {
+                const doctors = res.data[0];
+                console.table(doctors);
+            }
+            )
+        }
+
+        const fetchHospitalsByDistrictAndField = (field) => {
+            setSelectedField(field);
+            if(selectedDistrict.length < 3 || selectedField.length < 3)
+            {
+                return;
+            }
+
+            axios.get('http://localhost:4000/hospitals/fetch-all-hospital-by-field-and-district' + "?district='" + selectedDistrict.trim() + "'&field='" + selectedField.trim() + "'")
+            .then((res) =>
+            {
+                setHospital(res.data[0])
+            }
+            )
+        };
+    
+        const fetchCities = () => {
+            axios.get('http://localhost:4000/hospitals/fetch-all-cities')
+            .then((res) => 
+            {
+                setCities(res.data[0])
+            })
+        };
+
+        const fetchFieldByDistrict = (district) => {
+            setSelectedDistrict(district);
+            if(district.length < 3)
+            {
+                return;
+            }
+            axios.get('http://localhost:4000/hospitals/fetch-all-field-by-district' + "?district='" + district.trim() + "')")
+            .then((res) => 
+            {
+                setField(res.data[0])
+                console.log(res.data[0])
+            })
+        }
+    
+        const fetchDistrictByCity = (city) => {
+            setSelectedCity(city);
+            if(selectedCity.length < 3)
+            {
+                return;
+            }
+            axios.get('http://localhost:4000/hospitals/fetch-all-district-by-city' + "?city='" + city.trim() + "'")
+            .then((res) => 
+            {
+                setDistrict(res.data[0])
+                console.log(res.data[0])
+            })
+        }
+
+        useEffect(() => {
+            fetchCities();
+        }, [])
+        
+
         return (
             <div class="bg-black bg-opacity-50 flex overflow-x-auto overflow-y-auto fixed top-0 right-0 left-0 right-0 z-50 p-4 w-full h-full">
                 <div class="w-1/2 h-3/4 border-4 p-4 m-auto flex flex-col rounded-xl bg-indigo-300">
                     <button class="text-white hover:cursor-pointer font-semibold text-2xl ml-4 mt-4 bg-red-600 border-2 rounded-full flex items-center justify-center w-10 h-10" onClick={popDownAppointment}> X </button>
                     <span class="block text-3xl mx-auto mb-16 pt-16 "> Make an Appointment </span>
-                    <form class="w-full flex flex-col ">
+                    <form class="w-full flex flex-col" onSubmit={handleSubmit}>
                         <div class="flex flex-wrap">
                             <div class="w-full md:w-1/2 px-3 mb-6 ">
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     Il
                                 </label>
-                                <input placeholder="Ankara" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="cities" name="cityList" />
+                                <input onChange={e => fetchDistrictByCity(e.target.value)} value={selectedCity} placeholder="Ankara" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="cities" name="cityList" />
                                 <datalist id="cities" >
-                                    {cities.map((item, index) => {
+                                    {
+                                        cities.map((item, index) => {
                                         return <option key={index} value={item.Il}> </option>
                                     })}                                        
                                 </datalist>
@@ -83,7 +118,7 @@ const PatientAdmin = () => {
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     Ilce
                                 </label>
-                                <input placeholder="Golbasi" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="district" name="districtList" />
+                                <input disabled={selectedCity.length < 2} onChange={e => fetchFieldByDistrict(e.target.value) } value={selectedDistrict} placeholder="Golbasi" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="district" name="districtList" />
                                 <datalist id="district" >
                                     {district.map((item, index) => {
                                         return <option key={index} value={item.Ilce}> </option>
@@ -94,7 +129,7 @@ const PatientAdmin = () => {
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     Alan
                                 </label>
-                                <input placeholder="Kulak Burun Boğaz" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="fields" name="fieldList" />
+                                <input disabled={selectedDistrict.length < 2} onChange={e => fetchHospitalsByDistrictAndField(e.target.value)} value={selectedField} placeholder="Kulak Burun Boğaz" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="fields" name="fieldList" />
                                 <datalist id="fields" >
                                     {field.map((item, index) => {
                                         return <option key={index} value={item.Brans}> </option>
@@ -105,7 +140,7 @@ const PatientAdmin = () => {
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     Hastane
                                 </label>
-                                <input placeholder="Ankara Devlet" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="hospitals" name="hospitalList" />
+                                <input disabled={selectedField === ""} onChange={e => setSelectedHospital(e.target.value)} placeholder="Ankara Devlet" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" list="hospitals" name="hospitalList" />
                                 <datalist id="hospitals" >
                                     {hospital.map((item, index) => {
                                         return <option key={index} value={item.HastaneAdi}> </option>

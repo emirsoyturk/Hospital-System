@@ -9,7 +9,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import DoctorAdmin from './pages/DoctorAdmin'
 import PatientAdmin from './pages/PatientAdmin'
 import { useState, useEffect } from 'react'
-import Appointments from './pages/Appointments'
+import Calendar from './pages/Calendar'
 
 const App = () => {
 	const [userType, setUserType] = useState('');
@@ -36,9 +36,9 @@ const App = () => {
 	if(userType !== 'doctor' && userType !== 'patient')
 	{
 		return (
-			<div class="flex flex-col justify-center">
+			<div class="flex flex-col min-h-screen">
 			<Navbar token={null}/>
-			<main class="mb-auto">
+			<main>
 				<Router>
 					<Routes>
 						<Route path="/" element={<Home />} />
@@ -48,20 +48,22 @@ const App = () => {
 
 				</Router>
 			</main>
-			<Footer />
+			<footer class="mt-auto mb-0">
+				<Footer />
+			</footer>
 		</div>
 		)
 	}
 	else
 	{
 		return (
-			<div class="flex flex-col h-screen justify-between">
+			<div class="flex flex-col min-h-screen">
 				<Navbar userType={userType}/>
-				<main class="mb-auto">
+				<main>
 					<Router>
 						<Routes>
 							{ 
-								userType === 'doctor' && <Route path="/Appointments" element={<Appointments id={token}/>} />
+								userType === 'doctor' && <Route path="/Calendar" element={<Calendar id={token}/>} />
 							}
 							{
 								userType === 'doctor' && <Route path="/" element={<DoctorAdmin token={token} setUserType={setUserType}/>} /> 
@@ -73,7 +75,7 @@ const App = () => {
 						</Routes>
 					</Router>
 				</main>
-				<footer class="">
+				<footer class="mt-auto mb-0">
 					<Footer />
 				</footer>
 			</div>

@@ -333,6 +333,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 					</thead>
 					<tbody class="">
 						{appointments.map((appointment, i) => (
+							i < 10 &&
 							<tr key={i} class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800" onClick={() => popUpAppointment(appointment)}>
 								<td class="py-3 px-6">
 									<div class="flex items-center">
@@ -375,9 +376,9 @@ const DoctorAdmin = ({token, setUserType}) => {
 					</tbody>
 				</table>
 				<div class="mb-0 mt-auto">
-					<h1 class="float-right font-light text-indigo-500 hover:cursor-pointer  hover:">
+					<a href="/Clients" class="float-right font-light text-indigo-500 hover:cursor-pointer">
 						See more
-					</h1>
+					</a>
 				</div>
 			</div>
 		)
@@ -411,6 +412,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 					</thead>
 					<tbody class="">
 						{appointments.map((appointment, i) => (
+							i < 10 &&
 							<tr key={i} class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-300 hover:cursor-pointer dark:hover:bg-gray-800">
 								<td class="py-3 px-6">
 									<div class="flex items-center">
@@ -453,22 +455,29 @@ const DoctorAdmin = ({token, setUserType}) => {
 					</tbody>
 				</table>
 				<div class="mt-auto mb-0">
-					<h1 class="float-right font-light text-indigo-500 hover:cursor-pointer">
+					<a href="/Clients" class="float-right font-light text-indigo-500 hover:cursor-pointer">
 						See more
-					</h1>
+					</a>
 				</div>
 			</div>
 		)
 	}
 
 	const [doctorName, setDoctorName] = useState([]);
-	
+	const [totalPatients, setTotalPatients] = useState(0);
+
 	useEffect(() => {
 
 		axios.get('http://localhost:4000/doctors/fetchDoctorNameWithID?id=' + token)
 		.then((res) =>
 		{
 			setDoctorName(res.data[0][0])
+		})
+
+		axios.get('http://localhost:4000/doctors/count?id=' + token)
+		.then((res) =>
+		{
+			setTotalPatients(res.data[0][0].total)
 		})
 
 	}, []);
@@ -492,9 +501,11 @@ const DoctorAdmin = ({token, setUserType}) => {
 							<span class="text-xs"> Appointments </span>
 						</a>
 					</li>
-					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer" onClick={notify}>
-						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
-						<h1 class="text-xs"> Clients </h1>
+					<li>
+						<a href='/Clients' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
+							<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
+							<h1 class="text-xs"> Clients </h1>
+						</a>
 					</li>
 					<li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/482/482636.png" alt="" />
@@ -511,7 +522,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 				<div class="grid grid-cols-6 px-8 py-8 gap-y-8 gap-x-12">
 					<div class="flex flex-row col-start-1 col-span-2 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] h-16 px-8 py-4 justify-between">
 						<img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250740.png" alt="" />
-						3000 Patient Treated
+						{totalPatients} Patient Treated
 					</div>
 					<div class="col-start-1 col-span-3 bg-slate-100 rounded shadow-[5px_5px_30px_5px_rgba(0,0,0,0.2)] max-h-[100rem] p-4">
 						<FutureAppointments id={token} />

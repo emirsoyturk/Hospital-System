@@ -18,7 +18,11 @@ queries = {
 	'find-appointments-by-doctor-id': 'Select * from randevu join hasta on TCKimlikNo = HastaTCNo where DoktorTCNo = ', // Add TCKimlikNo after query;
 	'find-appointments-by-doctor-id-before-today': 'Select * from randevu join hasta on TCKimlikNo = HastaTCNo where  TARIH < now()  and DoktorTCNo = ',
 	'find-appointments-by-doctor-id-after-today': 'Select * from randevu join hasta on TCKimlikNo = HastaTCNo where  TARIH >= now()  and DoktorTCNo = ',
+	'find-recent-appointment-by-patient-id': 'SELECT doktor.isim, doktor.soyisim, unvan, brans, hastaneadi, tarih FROM doktor as doktor, hasta as hasta, randevu as randevu WHERE doktor.tckimlikno = randevu.doktortcno and hasta.tckimlikno = randevu.hastatcno and tarih <= NOW() and hastatcno = ',
+	'find-future-appointment-by-patient-id': 'SELECT doktor.isim, doktor.soyisim, unvan, brans, hastaneadi, tarih FROM doktor as doktor, hasta as hasta, randevu as randevu WHERE doktor.tckimlikno = randevu.doktortcno and hasta.tckimlikno = randevu.hastatcno and tarih > NOW() and hastatcno = ',
 	'find-all-medicines': 'Select * from ilac',
+	'count-all-appointments-by-doctor-id': 'Select count(*) as total from randevu where DoktorTCNo = ', // Add TCKimlikNo after query;
+	'find-appoinment-by-patient-id': 'SELECT doktor.isim, doktor.soyisim, unvan, brans, hastaneadi, tarih FROM doktor as doktor, hasta as hasta, randevu as randevu WHERE doktor.tckimlikno = randevu.doktortcno and hasta.tckimlikno = randevu.hastatcno and hasta.tckimlikno = ', // Add TCKimlikNo after query;
 }
 
 const add_medicine = (detayNo, randevuNo, IlacAdi, Aciklama, Tur, Doz, Periyot) => {

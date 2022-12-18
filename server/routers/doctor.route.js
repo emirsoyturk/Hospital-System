@@ -39,5 +39,11 @@ router.route('/recentAppointments').get(async (req, res) => {
     res.json(appointments);
 });
 
+router.route('/count').get(async (req, res) => {
+    let doctorID = req.query.id
+    const appointments = await sequelize.query(queries['count-all-appointments-by-doctor-id'] + "'" + doctorID + "'")
+    res.json(appointments);
+});
+
 
 module.exports = router;

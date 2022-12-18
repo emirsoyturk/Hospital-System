@@ -26,10 +26,8 @@ const sqlDateToJsDate = (sqlDate) => {
     
     return jsDate;
 }
-
 const firstDayOfMonth = new Date(year, month, 1).getDay();
-const lastDayOfMonth = new Date(year, month + 1, 0);
-const dayCount = 1;
+
 
 const Day = ({ day, month, year, appointments }) => {
     return (
@@ -41,11 +39,11 @@ const Day = ({ day, month, year, appointments }) => {
                 </div>
                 {
                     appointments.map((appointment, i) => {
-                        const dateCurr = sqlDateToJsDate(appointment.Tarih)
-                        if(appointment.Tarih.split("T")[0] == year + "-" + (month + 1) + "-" + day) {
+                        const dateCurr = sqlDateToJsDate(appointment.tarih)
+                        if(appointment.tarih.split("T")[0] == year + "-" + (month + 1) + "-" + day) {
                             return (
                                 <div class="event bg-red-400 text-white rounded p-1 text-sm mb-1">
-                                    <span class="event-name text-white"> {appointment.Isim + " " + appointment.Soyisim} </span>
+                                    <span class="event-name text-white"> {appointment.isim + " " + appointment.soyisim} </span>
                                     <span class="time text-white"> {dateCurr.toTimeString().split(":")[0] + ":00"} </span>
                             </div>
                             )
@@ -64,10 +62,10 @@ const Day = ({ day, month, year, appointments }) => {
 
                 {
                     appointments.map((appointment, i) => {
-                        if(appointment.Tarih == year + "-" + (month + 1) + "-" + day) {
+                        if(appointment.tarih == year + "-" + (month + 1) + "-" + day) {
                             return (
                                 <div class="event bg-red-400 text-white rounded p-1 text-sm mb-1">
-                                    <span class="event-name text-white"> {appointment.Isim + " " + appointment.Soyisim} </span>
+                                    <span class="event-name text-white"> {appointment.isim + " " + appointment.soyisim} </span>
                                     <span class="time text-white"> 12:00~14:00 </span>
                             </div>
                             )
@@ -85,7 +83,7 @@ const Appointments = ({id}) => {
     const [appointment, setAppointment] = useState([])
 
     useEffect(() => {
-		axios.get('http://localhost:4000/doctors/appointments?id=' + id)
+		axios.get('http://localhost:4000/patients/fetch-appointments?id=' + id)
 			.then(res => {
 				setAppointment(res.data[0])
                 console.log(res.data[0])
@@ -94,7 +92,6 @@ const Appointments = ({id}) => {
 				console.log(err)
 			})
 	}, [])
-    
 
     if(appointment.length === 0) {
         return (
@@ -126,7 +123,7 @@ const Appointments = ({id}) => {
                     </a>
                 </li>
                 <li>
-                    <a href='/Calendar' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">  
+                    <a href='/Appointments' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">  
                         <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1250/1250620.png" alt="" />
                         <span class="text-xs"> Appointments </span>
                     </a>
@@ -134,7 +131,7 @@ const Appointments = ({id}) => {
                 <li>
                     <a href='/Clients' class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">
                         <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1230/1230170.png" alt="" />
-                        <h1 class="text-xs"> Clients </h1>
+                        <h1 class="text-xs"> Doctors </h1>
                     </a>
                 </li>
                 <li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer">

@@ -40,6 +40,24 @@ router.route('/add-report').post(async (req, res, next) => {
     res.json(report);
 });
 
+router.route('/fetch-appointments').get(async (req, res, next) => {
+    const id = req.query.id;
+    const appointments = await sequelize.query(queries['find-appoinment-by-patient-id'] + id)
+    res.json(appointments);
+});
+
+router.route('/fetch-recent-appointments').get(async (req, res, next) => {
+    const id = req.query.id;
+    const appointments = await sequelize.query(queries['find-recent-appointment-by-patient-id'] + id)
+    res.json(appointments);
+});
+
+router.route('/fetch-future-appointments').get(async (req, res, next) => {
+    const id = req.query.id;
+    const appointments = await sequelize.query(queries['find-future-appointment-by-patient-id'] + id)
+    res.json(appointments);
+});
+
 
     
 

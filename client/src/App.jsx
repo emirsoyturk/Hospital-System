@@ -10,10 +10,14 @@ import DoctorAdmin from './pages/DoctorAdmin'
 import PatientAdmin from './pages/PatientAdmin'
 import { useState, useEffect } from 'react'
 import Calendar from './pages/Calendar'
+import Doctors from './pages/Doctors'
+import Appointments from './pages/Appointments'
+import Clients from './pages/Clients'
 
 const App = () => {
 	const [userType, setUserType] = useState('');
 	const [token, setToken] = useState(null);
+	const [selectedDoctors, setSelectedDoctors] = useState([]);
 
 	useEffect(() => {
 		const token = sessionStorage.getItem('token');
@@ -43,7 +47,6 @@ const App = () => {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/SignIn" element={<SignIn setToken={setToken} setUserType={setUserType}/>} />
-						<Route path="/Hospital/:id" element={<Hospital />} />
 					</Routes>
 
 				</Router>
@@ -69,7 +72,16 @@ const App = () => {
 								userType === 'doctor' && <Route path="/" element={<DoctorAdmin token={token} setUserType={setUserType}/>} /> 
 							}
 							{
-								userType === 'patient' && <Route path="/" element={<PatientAdmin token={token} setUserType={setUserType}/>} />
+								userType === 'doctor' && <Route path="/Clients" element={<Clients id={token} setUserType={setUserType}/>} /> 
+							}
+							{
+								userType === 'patient' && <Route path="/" element={<PatientAdmin token={token} setUserType={setUserType} setSelectedDoctors={setSelectedDoctors}/>} />
+							}
+							{
+								userType === 'patient' && <Route path="/Doctors" element={<Doctors selectedDoctors={selectedDoctors}/>} />
+							}
+							{
+								userType === 'patient' && <Route path="/Appointments" element={<Appointments id={token}/>} />
 							}
 
 						</Routes>

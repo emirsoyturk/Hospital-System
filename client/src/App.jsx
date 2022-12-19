@@ -5,7 +5,6 @@ import Home from './components/Home'
 import Footer from './components/Footer'
 import SignIn from './components/Login/SignIn'
 import SignUp from './components/Login/SignUp'
-import Hospital from './pages/Hospital'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import DoctorAdmin from './pages/DoctorAdmin'
 import PatientAdmin from './pages/PatientAdmin'
@@ -72,7 +71,7 @@ const App = () => {
 					<Router>
 						<Routes>
 							{ 
-								userType === 'doctor' && <Route path="/Calendar" element={<Calendar id={token}/>} />
+								userType === 'doctor' && <Route path="/Calendar" element={<Calendar id={token} setUserType={setUserType}/>} />
 							}
 							{
 								userType === 'doctor' && <Route path="/" element={<DoctorAdmin token={token} setUserType={setUserType}/>} /> 
@@ -87,7 +86,7 @@ const App = () => {
 								userType === 'patient' && <Route path="/Doctors" element={<Doctors id={token} setUserType={setUserType} selectedDoctors={selectedDoctors}/>} />
 							}
 							{
-								userType === 'patient' && <Route path="/Appointments" element={<Appointments id={token}/>} />
+								userType === 'patient' && <Route path="/Appointments" element={<Appointments id={token} setUserType={setUserType}/>} />
 							}
 							{
 								userType === 'doctor' && <Route path="/Profile" element={<DoctorProfile id={token}/>} />

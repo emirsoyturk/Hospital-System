@@ -21,7 +21,8 @@ const Doctors = ({id, setUserType, selectedDoctors}) => {
                     <div class="flex flex-col mt-16 mb-16">
                         {
                             selectedDoctors.map((doctor, i) => (
-                                <DoctorCard key={i} id={i} name={doctor.Isim} surname={doctor.Soyisim} unvan={doctor.Unvan} brans={doctor.Brans} />
+                                console.log(doctor),
+                                <DoctorCard key={i} id={doctor.TCKimlikNo} hastaNo={id} name={doctor.Isim} surname={doctor.Soyisim} unvan={doctor.Unvan} brans={doctor.Brans} />
                             ))
                         }
                     </div>

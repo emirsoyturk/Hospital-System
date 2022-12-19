@@ -2,7 +2,7 @@ import '../output.css'
 
 const Services = () => {
 	return (
-		<div class="flex flex-col items-center">
+		<div class="flex flex-col mb-16 items-center">
 			<h1 class="text-3xl text-center font-semibold"> Our Medical Services </h1>
 			<h1 class="text-xl text-gray-400 text-center font-thin w-60">
 				{' '}

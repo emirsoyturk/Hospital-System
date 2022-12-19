@@ -44,7 +44,7 @@ const SignIn = ({setToken, setUserType}) => {
 	}
 
 	return (
-		<div class="flex flex-col mt-32 space-y-16 rounded-2xl bg-slate-100 border-4 border-blue-200 shadow-[20px_35px_20px_-15px_rgba(0,0,0,0.3)] w-[50rem] h-[40rem] mx-auto">
+		<div class="flex flex-col mt-8 mb-16 space-y-16 rounded-2xl bg-slate-100 border-4 border-blue-200 shadow-[20px_35px_20px_-15px_rgba(0,0,0,0.3)] w-[50rem] h-[40rem] mx-auto">
 			<h1 class="text-4xl font-semibold text-center pt-16"> Sign in </h1>
 			<form class="flex flex-col mx-auto" onSubmit={handleSubmit}>
 				<label class="text-xl" for="email"> Email </label>
@@ -72,6 +72,9 @@ const SignIn = ({setToken, setUserType}) => {
 					Submit
 				</button>
 			</form>
+			<a href="/SignUp" class="text-indigo-700 mr-8 ml-auto text-[1.2rem] no-underline hover:underline ...">
+				Sign Up!
+			</a>
 		</div>
 	)
 }

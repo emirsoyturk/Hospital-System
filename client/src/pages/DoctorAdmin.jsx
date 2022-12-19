@@ -2,7 +2,6 @@ import '../output.css'
 import { PropTypes } from 'prop-types'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import {NotificationContainer, NotificationManager} from 'react-notifications';
 import toast, { Toaster } from 'react-hot-toast';
 
 
@@ -47,9 +46,60 @@ const DoctorAdmin = ({token, setUserType}) => {
 		</div>
 	  ));
 
+	const random8DigitForMedicine = () => {
+		let detayNo =  Math.floor(10000000 + Math.random() * 90000000);
 
-	const random8Digit = () => {
-		return Math.floor(10000000 + Math.random() * 90000000);
+		axios.get('http://localhost:4000/patients/get-medicine-by-detayNo?detayNo='+detayNo)
+		.then(res => {
+			if(res.data[0].length > 0)
+			{
+				random8DigitForMedicine()
+			}
+		})
+
+		return detayNo;
+	}
+
+	const random8DigitForReport = () => {
+		let detayNo =  Math.floor(10000000 + Math.random() * 90000000);
+
+		axios.get('http://localhost:4000/patients/get-report-by-detayNo?detayNo='+detayNo)
+		.then(res => {
+			if(res.data[0].length > 0)
+			{
+				random8DigitForReport()
+			}
+		})
+
+		return detayNo;
+	}
+
+	const random8DigitForDisease = () => {
+		let detayNo =  Math.floor(10000000 + Math.random() * 90000000);
+
+		axios.get('http://localhost:4000/patients/get-disease-by-detayNo?detayNo='+detayNo)
+		.then(res => {
+			if(res.data[0].length > 0)
+			{
+				random8DigitForDisease()
+			}
+		})
+
+		return detayNo;
+	}
+
+	const random8DigitForAnalysis = () => {
+		let detayNo =  Math.floor(10000000 + Math.random() * 90000000);
+
+		axios.get('http://localhost:4000/patients/get-analysis-by-detayNo?detayNo='+detayNo)
+		.then(res => {
+			if(res.data[0].length > 0)
+			{
+				random8DigitForAnalysis()
+			}
+		})
+
+		return detayNo;
 	}
 
 	const sqlDateToJsDate = (sqlDate) => {
@@ -101,7 +151,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 		{
 			notify("Ilac Eklendi")
 			axios.post('http://localhost:4000/patients/add-medicine', {
-				'detayNo': random8Digit(),
+				'detayNo': random8DigitForMedicine(),
 				'randevuNo': selectedPatient.RandevuNo,
 				'IlacAdi': selectedMedicineName,
 				'Aciklama': selectedMedicineDescription,
@@ -119,7 +169,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 		{
 			notify("Rapor Eklendi")
 			axios.post('http://localhost:4000/patients/add-report', {
-				'detayNo': random8Digit(),
+				'detayNo': random8DigitForReport(),
 				'randevuNo': selectedPatient.RandevuNo,
 				'Aciklama': selectedReportDescription,
 				'Tur': selectedReportType,
@@ -135,7 +185,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 		{
 			notify("Hastalik Eklendi")
 			axios.post('http://localhost:4000/patients/add-disease', {
-				'detayNo': random8Digit(),
+				'detayNo': random8DigitForDisease(),
 				'randevuNo': selectedPatient.RandevuNo,
 				'Aciklama': selectedDiseaseDescription,
 				'Tur': selectedDiseaseType,
@@ -151,7 +201,7 @@ const DoctorAdmin = ({token, setUserType}) => {
 		{
 			notify("Analiz Eklendi")
 			axios.post('http://localhost:4000/patients/add-analysis', {
-				'detayNo': random8Digit(),
+				'detayNo': random8DigitForAnalysis(),
 				'randevuNo': selectedPatient.RandevuNo,
 				'Aciklama': selectedAnalysisDescription,
 				'Tur': selectedAnalysisType,

@@ -10,6 +10,7 @@ const User = ({id}) => {
 		.then((res) =>
 		{
 			setUser(res.data[0][0])
+            console.log(res.data[0][0])
 		}
 		)
 		.catch(err => {
@@ -22,7 +23,9 @@ const User = ({id}) => {
         getPatient()
     }, [])
 
-    
+    if(!user) return (<div>Loading...</div>
+    )
+
     return (
         <div class="bg-white p-3 shadow-sm rounded-sm p-16 ">
             <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -64,6 +67,10 @@ const User = ({id}) => {
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Birth date </div>
                         <div class="px-4 py-2">{user.DogumTarihi}</div>
+                    </div>
+                    <div class="grid grid-cols-2">
+                        <div class="px-4 py-2 font-semibold">TC Kimlik </div>
+                        <div class="px-4 py-2">{user.TCKimlikNo}</div>
                     </div>
                 </div>
             </div>

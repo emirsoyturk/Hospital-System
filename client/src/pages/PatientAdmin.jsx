@@ -57,10 +57,6 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
         
         const handleSubmit = (e) => {
             e.preventDefault();
-            console.log(selectedCity);
-            console.log(selectedDistrict);
-            console.log(selectedField);
-            console.log(selectedHospital);
             axios.get('http://localhost:4000/hospitals/fetch-all-doctors-by-field-and-hospital' + "?hospital='" + selectedHospital.trim() + "'&field='" + selectedField.trim() + "'")
             .then((res) =>
             {
@@ -192,16 +188,16 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 			<div class="bg-black bg-opacity-50 flex overflow-x-auto overflow-y-auto fixed top-0 right-0 left-0 right-0 z-50 p-4 w-full h-full">
 				<div class="bg-white w-full h-full rounded-lg p-4">
 					<button class="text-white hover:cursor-pointer font-semibold text-2xl ml-4 mt-4 bg-red-600 border-2 rounded-full flex items-center justify-center w-10 h-10" onClick={e => setShowAppointmentDetail(false)}> X </button>
-					<div class="grid grid-cols-4 gap-6 mt-16">
-						<div class="flex flex-col justify-center text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl">
-							<span class="text-2xl font-bold -translate-y-[260px]"> Medicine Detail </span>
-							<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-							<thead class="-translate-y-[260px]">
+					<div class="grid grid-cols-4 gap-6 mt-2">
+						<div class="flex flex-col justify-center p-6 text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl">
+							<span class="text-2xl font-bold mt-0 mb-0"> Medicine Detail </span>
+							<table class="w-full text-sm mb-auto text-left text-gray-500 dark:text-gray-400">
+							<thead class="">
 								<tr >
-									<th class="py-3 px-10"> IlacAdi </th>
-									<th class="py-3 px-10"> Doz </th>
-									<th class="py-3 px-10"> Periyot </th>
-									<th class="py-3 px-10"> Tur </th>
+									<th class="py-3 px-2"> IlacAdi </th>
+									<th class="py-3 px-2"> Doz </th>
+									<th class="py-3 px-2"> Periyot </th>
+									<th class="py-3 px-2"> Tur </th>
 								</tr>
 							</thead>
 							<tbody class="">
@@ -209,10 +205,10 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 									medicineDetails.map((item, index) => {
 										return (
 											<tr key={index}>
-												<td class="py-3 px-10"> {item.IlacAdi} </td>
-												<td class="py-3 px-10"> {item.Doz} </td>
-												<td class="py-3 px-10"> {item.Periyot} </td>
-												<td class="py-3 px-10"> {item.Tur} </td>
+												<td class="py-3 px-2"> {item.IlacAdi} </td>
+												<td class="py-3 px-2"> {item.Doz} </td>
+												<td class="py-3 px-2"> {item.Periyot} </td>
+												<td class="py-3 px-2"> {item.Tur} </td>
 											</tr>
 										)
 									})
@@ -220,24 +216,28 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 							</tbody>
 						</table>
 						</div>
-						<div class="flex flex-col justify-center text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl">
-							<span class="ml-8 text-2xl font-bold -translate-y-[260px]"> Analysis Detail </span>
-							<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-							<thead class="-translate-y-[260px]">
+						<div class="flex flex-col justify-center p-6 text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl">
+							<span class="ml-8 text-2xl font-bold mt-0 mb-0 mt-0"> Analysis Detail </span>
+							<table class="w-full text-sm mb-auto text-left text-gray-500 dark:text-gray-400">
+							<thead class="">
 								<tr >
-									<th class="py-3 px-10"> TestGorseli </th>
-									<th class="py-3 px-10"> Aciklama </th>
-									<th class="py-3 px-10"> Tur </th>
+									<th class="py-3 px-2"> TestGorseli </th>
+									<th class="py-3 px-2"> Aciklama </th>
+									<th class="py-3 px-2"> Tur </th>
 								</tr>
 							</thead>
 							<tbody class="">
 								{
-									analysisDetails.map((item, index) => {
+									analysisDetails.slice(0, 4).map((item, index) => {
 										return (
 											<tr key={index}>
-												<td class="py-3 px-10"> {item.IlacAdi} </td>
-												<td class="py-3 px-10"> {item.Doz} </td>
-												<td class="py-3 px-10"> {item.Periyot} </td>
+												<td class="py-3 px-2"> 
+													<a href={"http://"+item.TestGorseli} alt="test" class="w-10 h-10 rounded-full bg-blue-300 rounded-full px-4 py-1 hover:bg-blue-400"> 
+														See
+													</a>
+												</td>
+												<td class="py-3 px-2"> {item.Aciklama} </td>
+												<td class="py-3 px-2"> {item.Tur} </td>
 											</tr>
 										)
 									})
@@ -246,14 +246,14 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 						</table>
 
 						</div>
-						<div class="flex  flex-col justify-center p-6 text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl" >
-							<span class="text-2xl font-bold"> Disease Detail </span>
-							<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+						<div class="flex flex-col justify-center p-6 text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl" >
+							<span class="text-2xl font-bold mt-0 mb-0"> Disease Detail </span>
+							<table class="w-full text-sm mb-auto text-left text-gray-500 dark:text-gray-400">
 							<thead >
 								<tr >
-									<th class="py-3 px-10"> Aciklama </th>
-									<th class="py-3 px-10"> Belirtiler </th>
-									<th class="py-3 px-10"> Tur </th>
+									<th class="py-3 px-2"> Aciklama </th>
+									<th class="py-3 px-2"> Belirtiler </th>
+									<th class="py-3 px-2"> Tur </th>
 								</tr>
 							</thead>
 							<tbody class="">
@@ -261,9 +261,9 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 									diseaseDetails.map((item, index) => {
 										return (
 											<tr key={index}>
-												<td class="py-3 px-10"> {item.Aciklama} </td>
-												<td class="py-3 px-10"> {item.Belirtiler} </td>
-												<td class="py-3 px-10"> {item.Tur} </td>
+												<td class="py-3 px-2"> {item.Aciklama} </td>
+												<td class="py-3 px-2"> {item.Belirtiler} </td>
+												<td class="py-3 px-2"> {item.Tur} </td>
 											</tr>
 										)
 									})
@@ -271,25 +271,24 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 							</tbody>
 						</table>
 						</div>
-
 						<div class="flex flex-col justify-center p-6 text-6xl bg-gray-100 border-2 border-gray-300 rounded-xl" >
-							<span class="text-2xl font-bold -translate-y-[260px]"> Report Detail </span>
-							<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-							<thead class="-translate-y-[260px]">
+							<span class="text-2xl font-bold mt-0 mb-0"> Report Detail </span>
+							<table class="w-full text-sm mb-auto text-left text-gray-500 dark:text-gray-400">
+							<thead class="">
 								<tr >
-									<th class="py-3 px-10"> RaporSuresi </th>
-									<th class="py-3 px-10"> Aciklama </th>
-									<th class="py-3 px-10"> Tur </th>
+									<th class="py-3 px-2"> RaporSuresi </th>
+									<th class="py-3 px-2"> Aciklama </th>
+									<th class="py-3 px-2"> Tur </th>
 								</tr>
 							</thead>
 							<tbody class="">
 								{
-									reportDetails.map((item, index) => {
+									reportDetails.slice(0, 8).map((item, index) => {
 										return (
 											<tr key={index}>
-												<td class="py-3 px-10"> {item.RaporSuresi} </td>
-												<td class="py-3 px-10"> {item.Doz} </td>
-												<td class="py-3 px-10"> {item.Periyot} </td>
+												<td class="py-3 px-2"> {item.RaporSuresi} </td>
+												<td class="py-3 px-2"> {item.Aciklama} </td>
+												<td class="py-3 px-2"> {item.Tur} </td>
 											</tr>
 										)
 									})
@@ -323,7 +322,7 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 		axios.get('http://localhost:4000/patients/fetch-appointment-detail-by-appointment-id' + "?id=" + appointment.randevuNo)
 		.then((res) =>
 		{
-			console.log(res.data.medicineDetail[0])
+			console.log(res.data)
 			setMedicineDetails(res.data.medicineDetail[0])
 			setAnalysisDetails(res.data.analysisDetail[0])
 			setDiseaseDetails(res.data.diseaseDetail[0])
@@ -355,13 +354,13 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 		return (
 			<div class="flex flex-col min-h-full">
 				<h1 class="text-indigo-600 text-lg mb-8"> Incoming appointments </h1>
-				<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+				<table class="w-full text-sm mb-auto text-left text-gray-500 dark:text-gray-400">
 					<thead>
 						<tr >
-							<th class="py-3 px-10"> Name </th>
-							<th class="py-3 px-10"> Field </th>
-							<th class="py-3 px-10"> Hospital </th>
-							<th class="py-3 px-10"> Date </th>
+							<th class="py-3 px-2"> Name </th>
+							<th class="py-3 px-2"> Field </th>
+							<th class="py-3 px-2"> Hospital </th>
+							<th class="py-3 px-2"> Date </th>
 						</tr>
 					</thead>
 					<tbody class="">
@@ -434,13 +433,13 @@ const PatientAdmin = ({setSelectedDoctors, setUserType, token}) => {
 		return (
 			<div class="flex flex-col min-h-full">
 				<h1 class="text-indigo-600 text-lg mb-8"> Recent appointments </h1>
-				<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+				<table class="w-full text-sm mb-auto text-left text-gray-500 dark:text-gray-400">
 					<thead>
 						<tr >
-							<th class="py-3 px-10"> Name </th>
-							<th class="py-3 px-10"> Field </th>
-							<th class="py-3 px-10"> Hospital </th>
-							<th class="py-3 px-10"> Date </th>
+							<th class="py-3 px-2"> Name </th>
+							<th class="py-3 px-2"> Field </th>
+							<th class="py-3 px-2"> Hospital </th>
+							<th class="py-3 px-2"> Date </th>
 						</tr>
 					</thead>
 					<tbody class="">

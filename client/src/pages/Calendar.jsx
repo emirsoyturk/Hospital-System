@@ -1,6 +1,7 @@
 import '../output.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -11,6 +12,7 @@ const date = new Date();
 let currentDay = date.getDate();
 let month = date.getMonth();
 let year = date.getFullYear();
+
 
 const sqlDateToJsDate = (sqlDate) => {
     var sqlDateArr1 = sqlDate.split("-");
@@ -80,7 +82,8 @@ const Day = ({ day, month, year, appointments }) => {
     )
 }
 
-const Appointments = ({id}) => {
+const Appointments = ({id, setUserType}) => {
+    const navigate = useNavigate();
 
     const [appointment, setAppointment] = useState([])
 
@@ -114,10 +117,17 @@ const Appointments = ({id}) => {
         )
     }
 
+    const Logout = () => {
+        setUserType(null)
+		sessionStorage.removeItem('token')
+		sessionStorage.removeItem('userType')
+        navigate('/')
+    }
+
 	return (
         
 		<div class="container mx-auto mt-10 flex ">
-            <div class="bg-slate-100 col-start-1 -ml-[17rem] pl-[3rem] pr-[1rem] mr-[10rem] col-span-1 pt-8 shadow-[10px_5px_5px_-5px_rgba(0,0,0,0.2)]">
+            <div class="bg-slate-100 col-start-1 -ml-[1rem] pl-[3rem] pr-[1rem] mr-[1rem] col-span-1 pt-8 shadow-[10px_5px_5px_-5px_rgba(0,0,0,0.2)]">
             <ul class="flex flex-col justify-between">
                 <li class="">
                     <a class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer" href='/'>
@@ -141,14 +151,14 @@ const Appointments = ({id}) => {
                     <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/482/482636.png" alt="" />
                     <h1 class="text-xs"> Profile </h1>
                 </li>
-                <li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer" >
+                <li class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer" onClick={Logout}>
                     <img class="w-8" src="https://cdn-icons-png.flaticon.com/512/1243/1243950.png" alt="" />
                     <h1 class="text-xs"> Log out </h1>
                 </li>
                 
             </ul>
         </div>
-            <div class="wrapper bg-white rounded shadow w-full ">
+            <div class="wrapper bg-white rounded shadow w-full mx-16 mb-16">
             <div class="header flex justify-between border-b p-2">
                 <span class="text-lg font-bold">
                 {year} {monthNames[month]} {currentDay}

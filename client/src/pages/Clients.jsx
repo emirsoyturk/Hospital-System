@@ -76,9 +76,9 @@ const Clients = ({id, setUserType}) => {
 					
 				</ul>
 			</div>
-            <div class="pl-16 w-full">
+            <div class="pl-16 w-full mr-16">
             <h1 class="text-indigo-600 text-3xl mb-8"> All appointments </h1>
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                 <thead>
                     <tr >
                         <th class="py-3 px-10"> TC </th>

@@ -122,11 +122,11 @@ public class Gen {
             hastaNum = 40;
             hastaneNum = 5;
             doktorNum = 40;
-            randevuNum = 50;
+            randevuNum = 200;
             ilacNum = 60;
-            raporNum = 1000;
-            hastalikNum = 300;
-            tahlilNum = 1000;
+            raporNum = 200;
+            hastalikNum = 30;
+            tahlilNum = 200;
             receteNum = 10;
         }
 

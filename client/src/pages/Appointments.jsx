@@ -113,8 +113,8 @@ const Appointments = ({id}) => {
 
 	return (
         
-		<div class="container mx-auto mt-10 flex ">
-            <div class="bg-slate-100 col-start-1 -ml-[17rem] pl-[3rem] pr-[1rem] mr-[10rem] col-span-1 pt-8 shadow-[10px_5px_5px_-5px_rgba(0,0,0,0.2)]">
+		<div class="container mx-auto mt-10 flex mb-16">
+            <div class="bg-slate-100 col-start-1 -ml-[2rem] pl-[3rem] mr-[1rem] col-span-1 pt-8 shadow-[10px_5px_5px_-5px_rgba(0,0,0,0.2)]">
             <ul class="flex flex-col justify-between">
                 <li class="">
                     <a class="flex flex-col items-center p-4 hover:bg-slate-200 hover:cursor-pointer" href='/'>
@@ -147,7 +147,7 @@ const Appointments = ({id}) => {
                 
             </ul>
         </div>
-            <div class="wrapper bg-white rounded shadow w-full ">
+            <div class="wrapper mx-16 bg-white rounded shadow w-full ">
             <div class="header flex justify-between border-b p-2">
                 <span class="text-lg font-bold">
                 {year} {monthNames[month]} {currentDay}

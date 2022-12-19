@@ -29,7 +29,12 @@ queries = {
 	'find-report-detail-by-appointment-id': 'Select * from rapor where randevuno = ', // Add randevuNo after query;
 	'count-all-appointments-by-doctor-id': 'Select count(*) as total from randevu where DoktorTCNo = ', // Add TCKimlikNo after query;
 	'find-appoinment-by-patient-id': 'SELECT doktor.isim, doktor.soyisim, unvan, brans, hastaneadi, tarih FROM doktor as doktor, hasta as hasta, randevu as randevu WHERE doktor.tckimlikno = randevu.doktortcno and hasta.tckimlikno = randevu.hastatcno and hasta.tckimlikno = ', // Add TCKimlikNo after query;
-	'find-appointment-analysis-by-id-and-randevu-no': 'Select * from tahlil where detayno = ', // Add detayNo after query; 
+	'find-appointment-analysis-by-id-and-randevu-no': 'Select * from tahlil where detayno = ', // Add detayNo after query;
+	'find-appointment-by-randevuNo': 'Select * from randevu where randevuno = ', // Add randevuNo after query; 
+	'find-disease-by-detayNo': 'Select * from hastalik where detayno = ', // Add detayNo after query;
+	'find-medicine-by-detayNo': 'Select * from recete where detayno = ', // Add detayNo after query;
+	'find-report-by-detayNo': 'Select * from rapor where detayno = ', // Add detayNo after query;
+	'find-analysis-by-detayNo': 'Select * from tahlil where detayno = ', // Add detayNo after query;
 }
 
 const add_medicine = (detayNo, randevuNo, IlacAdi, Aciklama, Tur, Doz, Periyot) => {
@@ -48,4 +53,12 @@ const add_report = (detayNo, randevuNo, RaporSuresi, Aciklama, Tur) => {
 	return `INSERT INTO rapor VALUES (${detayNo}, ${randevuNo}, '${RaporSuresi}', '${Aciklama}', '${Tur}')`
 }
 
-module.exports = { queries, add_medicine, add_analysis, add_disease, add_report }
+const add_appointment = (randevuNo, randevuTuru, Tarih, DoktorTCNo, HastaTCNo) => {
+	return `INSERT INTO randevu VALUES (${randevuNo}, '${randevuTuru}', STR_TO_DATE('${Tarih}', '%d/%m/%Y %H:%i'), ${DoktorTCNo}, ${HastaTCNo})`
+}
+
+const add_patient = (TCKimlikNo, Isim, Soyisim, DogumTarihi, KanGrubu, Cinsiyet, Boy, Kilo) => {
+	return (`INSERT INTO hasta VALUES ('${TCKimlikNo}', '${Isim}', '${Soyisim}', '${KanGrubu}', '${Cinsiyet}', ${Boy}, ${Kilo}, STR_TO_DATE('${DogumTarihi}', '%d/%m/%Y'))`)
+}
+
+module.exports = { queries, add_medicine, add_analysis, add_disease, add_report, add_appointment, add_patient }

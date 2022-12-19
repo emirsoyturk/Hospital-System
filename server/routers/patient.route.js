@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { sequelize } = require('../models')
-const { queries, add_medicine, add_analysis, add_disease, add_report } = require('../queries')
+const { queries, add_medicine, add_analysis, add_disease, add_report, add_appointment, add_patient } = require('../queries')
 
 router.route('/fetch').get(async (req, res, next) => {
     const id = req.query.id;
@@ -86,11 +86,49 @@ router.route('/fetch-appointment-detail-by-appointment-id').get(async (req, res,
     });
 });
 
+router.route('/add-appointment').post(async (req, res, next) => {
+    const appointment = req.body;
+    await sequelize.query(add_appointment(appointment.randevuNo, appointment.randevuTuru, appointment.randevuTarihi, appointment.doktorNo, appointment.hastaNo))
+    console.log(appointment);
+    res.json(appointment);
+});
 
+router.route('/add').post(async (req, res, next) => {
+    const patient = req.body;
+    console.log(patient);
+    await sequelize.query(add_patient(patient.tcNo, patient.firstName, patient.lastName, patient.dateOfBirth, patient.bloodType, patient.gender, patient.height, patient.weight))
+    res.json({});
+});
 
+router.route('/get-appointment-by-randevuNo').get(async (req, res, next) => {
+    const randevuNo = req.query.randevuNo;
+    const appointment = await sequelize.query(queries['find-appointment-by-randevuNo'] + randevuNo)
+    res.json(appointment);
+});
 
-    
+router.route('/get-analysis-by-detayNo').get(async (req, res, next) => {
+    const detayNo = req.query.detayNo;
+    const analysis = await sequelize.query(queries['find-analysis-by-detayNo'] + detayNo)
+    res.json(analysis);
+});
 
+router.route('/get-medicine-by-detayNo').get(async (req, res, next) => {
+    const detayNo = req.query.detayNo;
+    const medicine = await sequelize.query(queries['find-medicine-by-detayNo'] + detayNo)
+    res.json(medicine);
+});
+
+router.route('/get-disease-by-detayNo').get(async (req, res, next) => {
+    const detayNo = req.query.detayNo;
+    const disease = await sequelize.query(queries['find-disease-by-detayNo'] + detayNo)
+    res.json(disease);
+});
+
+router.route('/get-report-by-detayNo').get(async (req, res, next) => {
+    const detayNo = req.query.detayNo;
+    const report = await sequelize.query(queries['find-report-by-detayNo'] + detayNo)
+    res.json(report);
+});
 
 
 module.exports = router;

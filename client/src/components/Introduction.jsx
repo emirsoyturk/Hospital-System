@@ -12,13 +12,13 @@ const Introduction = () => {
 				</h1>
 			</div>
 			<div class="flex flex-row pt-10 justify-center" id="introductionButtons">
-				<button class="bg-indigo-700 py-2 px-4 hover:bg-indigo-500 text-white font-semibold rounded rounded-2xl">
+				<a href="/SignIn" class="bg-indigo-700 py-2 px-4 hover:bg-indigo-500 text-white font-semibold rounded rounded-2xl">
 					Book an appointment
-				</button>
+				</a>
 			</div>
 			<div class="flex space-x-5 justify-center pt-5">
 				<h1 class="text-center text-[1.2rem]">Become member of our hospital community?</h1>
-				<a href="google.com" class="text-indigo-700 text-[1.2rem] no-underline hover:underline ...">
+				<a href="/SignUp" class="text-indigo-700 text-[1.2rem] no-underline hover:underline ...">
 					Sign Up!
 				</a>
 			</div>

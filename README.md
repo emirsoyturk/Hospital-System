@@ -11,7 +11,7 @@
 <h3 align="center">IPC Server</h3>
 
   <p align="center">
-    Simple IPC Server implementation, using multithreading.
+  Hospital System is a web application that allows users to manage their patients and their medical records. 
     <br /> <br />
   </p>
 </div>

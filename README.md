@@ -8,7 +8,7 @@
     <img src="https://avatars.githubusercontent.com/u/72819472?v=4" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">IPC Server</h3>
+<h3 align="center">Hospital System</h3>
 
   <p align="center">
   Hospital System is a web application that allows users to manage their patients and their medical records. 

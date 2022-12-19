@@ -9,6 +9,7 @@ node_modules
 bower_components
 
 *.sublime*
+*.class
 
 psd
 thumb
